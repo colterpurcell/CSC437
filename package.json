@@ -1,0 +1,23 @@
+{
+  "name": "colter437",
+  "version": "1.0.0",
+  "description": "A monorepo for Poly CSC437",
+  "homepage": "https://github.com/colterpurcell/CSC437#readme",
+  "bugs": {
+    "url": "https://github.com/colterpurcell/CSC437/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colterpurcell/CSC437.git"
+  },
+  "license": "ISC",
+  "author": "Colter Purcell",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

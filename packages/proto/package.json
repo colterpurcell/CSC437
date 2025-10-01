@@ -1,0 +1,15 @@
+{
+  "name": "colter437proto",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Colter Purcell",
+  "type": "module",
+  "main": "public/index.html",
+  "scripts": {
+    "start": "http-server ./public -c-1 -o"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
