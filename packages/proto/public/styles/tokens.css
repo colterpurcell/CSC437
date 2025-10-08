@@ -34,6 +34,11 @@
   --color-warning: var(--color-accent);
   --color-error: #C44536;
 
+  /* Icon Color */
+  --color-icon: var(--color-text);
+  --color-icon-muted: var(--color-text-muted);
+
+
   /* Spacing */
   --spacing-xs: 4px;
   --spacing-sm: 8px;

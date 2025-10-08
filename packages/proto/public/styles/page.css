@@ -94,30 +94,6 @@ section:not(:first-child) {
   margin-top: calc(var(--spacing-xxl) * 1.5);
 }
 
-/* List styling */
-ul {
-  padding-left: var(--spacing-xl);
-  margin: var(--spacing-lg) 0;
-  list-style-type: disc;
-}
-
-ul li {
-  padding: var(--spacing-xs) 0;
-  margin-bottom: var(--spacing-sm);
-}
-
-/* Nested lists */
-ul ul {
-  padding-left: var(--spacing-lg);
-  margin-top: var(--spacing-sm);
-  list-style-type: circle;
-}
-
-ul ul li {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-light);
-}
-
 li strong {
   color: var(--color-accent);
   font-weight: var(--font-weight-semibold);
@@ -127,7 +103,7 @@ li strong {
 a {
   color: var(--color-link);
   text-decoration: underline;
-  text-decoration-color: rgba(138, 63, 11, 0.4);
+  text-decoration-color: var(--color-link);
   text-underline-offset: 2px;
   font-weight: var(--font-weight-semibold);
   transition: all 0.2s ease;
@@ -191,4 +167,31 @@ section:target {
   100% {
     background-color: var(--color-background-card);
   }
+}
+
+/* SVG Icon Classes */
+.icon {
+  fill: var(--color-icon);
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.icon-sm {
+  width: 16px;
+  height: 16px;
+}
+
+.icon-md {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-lg {
+  width: 32px;
+  height: 32px;
+}
+
+.icon-xl {
+  width: 64px;
+  height: 64px;
 }
