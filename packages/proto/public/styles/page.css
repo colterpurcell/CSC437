@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('/styles/reset.css');
 @import url('/styles/tokens.css');
@@ -14,9 +15,7 @@ body {
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-base);
   margin: 0;
-  padding: var(--spacing-xxl);
-  max-width: 900px;
-  margin: 0 auto;
+  padding: var(--spacing-lg);
 }
 
 /* Navigation styling */
@@ -24,10 +23,16 @@ nav {
   background-color: var(--color-background-header);
   color: var(--color-text-inverted);
   padding: var(--spacing-lg) var(--spacing-xl);
-  margin: calc(-1 * var(--spacing-xxl)) calc(-1 * var(--spacing-xxl)) var(--spacing-xxl) calc(-1 * var(--spacing-xxl));
+  margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) var(--spacing-xl) calc(-1 * var(--spacing-lg));
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  font-family: var(--font-family-primary);
   font-weight: var(--font-weight-semibold);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-size: var(--font-size-lg);
+
+  &>a:visited {
+    color: var(--color-text-inverted);
+  }
 }
 
 nav a {
@@ -49,7 +54,7 @@ nav a:hover {
 /* Typography */
 h1 {
   color: var(--color-primary);
-  font-family: var(--font-family-heading);
+  font-family: var(--font-family-display);
   font-size: 3rem;
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
@@ -62,7 +67,7 @@ h1 {
 
 h2 {
   color: var(--color-primary);
-  font-family: var(--font-family-heading);
+  font-family: var(--font-family-display);
   font-size: 2rem;
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
@@ -75,23 +80,64 @@ h2 {
 /* Article and section styling */
 article {
   background-color: var(--color-background-section);
-  padding: var(--spacing-xxl);
+  padding: var(--spacing-lg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-md);
+}
+
+article>h1,
+article>p {
+  grid-column: 1 / -1;
 }
 
 section {
   background-color: var(--color-background-card);
-  padding: var(--spacing-xxl);
-  margin: var(--spacing-xxl) 0;
+  padding: var(--spacing-lg);
+  margin: var(--spacing-sm) 0;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
   position: relative;
 }
 
-section:not(:first-child) {
-  margin-top: calc(var(--spacing-xxl) * 1.5);
+/* Global Grid System */
+.grid-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.grid-section h2 {
+  grid-column: 1 / -1;
+  margin-bottom: var(--spacing-lg);
+}
+
+.card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--spacing-lg);
+  align-items: start;
+  background-color: var(--color-background-card);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.card img {
+  border-radius: var(--radius-sm);
+  max-width: 150px;
+  height: auto;
+}
+
+.card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 li strong {
@@ -194,4 +240,17 @@ section:target {
 .icon-xl {
   width: 64px;
   height: 64px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-lg);
+  }
+
+  nav {
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) var(--spacing-xl) calc(-1 * var(--spacing-lg));
+    font-size: var(--font-size-sm);
+  }
 }

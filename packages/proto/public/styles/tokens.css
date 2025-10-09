@@ -1,38 +1,60 @@
 :root {
-  /* Color Palette - Warm Modern Theme */
-  --color-primary: #8B4513;
-  --color-primary-light: #CD853F;
-  --color-primary-dark: #654321;
+  /* Color Palette - High Contrast Nature Theme */
+  --color-primary: #0D4F3C;
+  /* Deep forest green */
+  --color-primary-light: #1B6B47;
+  /* Medium forest green */
+  --color-primary-dark: #062D23;
+  /* Very dark forest green */
   --color-accent: #FF6B35;
+  /* Bright orange (trail marker) */
   --color-accent-hover: #E55A2B;
+  /* Darker orange on hover */
 
   /* Text Colors */
-  --color-text: #000000;
-  --color-text-light: #444444;
+  --color-text: #1A1A1A;
+  /* Near black for maximum contrast */
+  --color-text-light: #2D2D2D;
+  /* Dark gray for secondary text */
   --color-text-inverted: #FFFFFF;
-  --color-text-muted: #777777;
+  /* Pure white for dark backgrounds */
+  --color-text-muted: #666666;
+  /* Medium gray for muted text */
 
   /* Background Colors */
   --color-background-page: #FFFFFF;
+  /* Pure white page background */
   --color-background-header: var(--color-primary);
+  /* Dark green header */
   --color-background-section: #FFFFFF;
-  --color-background-card: #F9F9F9;
-  --color-background-anchor-highlight: rgba(210, 105, 30, 0.15);
+  /* White sections */
+  --color-background-card: #F8F9FA;
+  /* Light gray cards */
+  --color-background-anchor-highlight: var(--color-accent);
 
   /* Border Colors */
-  --color-border: #DDDDDD;
+  --color-border: #C0C0C0;
+  /* Medium gray borders */
   --color-border-accent: var(--color-accent);
-  --color-border-light: #F0F0F0;
+  /* Orange accent borders */
+  --color-border-light: #E8E8E8;
+  /* Light gray borders */
 
   /* Link Colors */
-  --color-link: #D2691E;
+  --color-link: #8B4513;
+  /* Brown links */
   --color-link-hover: #FF6B35;
-  --color-link-visited: #F5A623;
+  /* Orange on hover */
+  --color-link-visited: var(--color-primary-light);
+  /* Lighter green for visited links */
 
   /* Status Colors */
-  --color-success: var(--color-primary-light);
-  --color-warning: var(--color-accent);
-  --color-error: #C44536;
+  --color-success: #28A745;
+  /* Standard success green */
+  --color-warning: #FFC107;
+  /* Standard warning yellow */
+  --color-error: #DC3545;
+  /* Standard error red */
 
   /* Icon Color */
   --color-icon: var(--color-text);
@@ -48,8 +70,8 @@
   --spacing-xxl: 48px;
 
   /* Typography */
+  --font-family-display: 'Knewave', cursive;
   --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-family-heading: var(--font-family-primary);
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
   --font-size-lg: 1.125rem;
