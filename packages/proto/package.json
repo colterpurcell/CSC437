@@ -1,5 +1,5 @@
 {
-  "name": "colter437proto",
+  "name": "proto",
   "version": "1.0.0",
   "description": "",
   "license": "ISC",
@@ -7,7 +7,7 @@
   "type": "module",
   "main": "public/index.html",
   "scripts": {
-    "start": "http-server ./public -c-1 -o"
+    "start": "http-server ./public -c-1 -p 3000"
   },
   "dependencies": {
     "http-server": "^14.1.1"
