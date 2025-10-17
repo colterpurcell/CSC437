@@ -27,7 +27,6 @@ nav {
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   font-family: var(--font-family-primary);
   font-weight: var(--font-weight-semibold);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   font-size: var(--font-size-lg);
 
   &>a:visited {
@@ -35,11 +34,31 @@ nav {
   }
 }
 
+/* Breadcrumb container for wrapping */
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+nav label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+}
+
+nav input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-accent);
+}
+
 nav a {
   color: var(--color-text-inverted);
   text-decoration: none;
   font-weight: var(--font-weight-bold);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 nav a:hover {
@@ -47,8 +66,9 @@ nav a:hover {
   color: var(--color-text-inverted);
 }
 
-nav a:hover {
-  text-decoration: underline;
+nav a:focus {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 /* Typography */
@@ -116,12 +136,10 @@ section {
 }
 
 .card {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--spacing-lg);
-  align-items: start;
+  position: relative;
   background-color: var(--color-background-card);
   padding: var(--spacing-lg);
+  padding-top: calc(200px + var(--spacing-lg));
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
@@ -129,9 +147,13 @@ section {
 }
 
 .card img {
-  border-radius: var(--radius-sm);
-  max-width: 150px;
-  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
 }
 
 .card:hover {

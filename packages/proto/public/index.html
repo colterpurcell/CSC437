@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>National Parks Adventure Guide</title>
     <link rel="stylesheet" href="/styles/page.css" />
+    <script src="/scripts/theme.js"></script>
+    <script src="/scripts/theme.js"></script>
   </head>
   <body>
-    <article>
+    <nav>
+      <label for="dark-mode-toggle">
+        <input type="checkbox" id="dark-mode-toggle" autocomplete="off" />
+        Dark mode
+      </label>
+    </nav>
+    <article id="main-content">
       <h1>National Parks Adventure Guide</h1>
 
       <section>
@@ -111,7 +119,7 @@
           <li>
             <a href="parks/yosemite/"
               ><svg class="icon icon-md">
-                <use href="/assets/icons/camping.svg#forest2"></use>
+                <use href="/assets/icons/camping.svg#icon-forest"></use>
               </svg>
               Yosemite National Park</a
             >
