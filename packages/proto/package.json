@@ -8,7 +8,8 @@
   "main": "index.html",
   "scripts": {
     "dev": "npx vite",
-    "build": "npx tsc && npx vite build"
+    "build": "npx tsc && npx vite build",
+    "start": "http-server dist -p 3000"
   },
   "dependencies": {
     "@calpoly/mustang": "^1.0.15",
