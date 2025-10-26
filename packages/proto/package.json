@@ -5,11 +5,20 @@
   "license": "ISC",
   "author": "Colter Purcell",
   "type": "module",
-  "main": "public/index.html",
+  "main": "index.html",
   "scripts": {
-    "start": "http-server ./public -c-1 -p 3000"
+    "dev": "npx vite",
+    "build": "npx tsc && npx vite build"
   },
   "dependencies": {
-    "http-server": "^14.1.1"
+    "@calpoly/mustang": "^1.0.15",
+    "http-server": "^14.1.1",
+    "lit": "^3.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.1",
+    "glob": "^11.0.3",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1"
   }
 }

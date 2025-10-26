@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trips - Adventure Guide</title>
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="/nav.ts"></script>
+    <script type="module" src="/card.ts"></script>
+    <script type="module" src="/section-header.ts"></script>
+  </head>
+  <body>
+    <nav-element>
+      <span slot="breadcrumb"> </span>
+      <a href="../index.html">Adventure Guide</a> → Trips</nav-element
+    >
+
+    <section-header title="Trips" icon="boot"></section-header>
+    <p style="margin-bottom: var(--spacing-xl); color: var(--color-text-light)">
+      Plan your perfect adventure with our curated trip packages and resources.
+    </p>
+
+    <card-grid>
+      <card-element
+        title="Yellowstone Summer"
+        description="Experience the peak season in America's first national park with wildlife viewing and geyser watching."
+        href="yellowstone-summer-trip.html"
+      >
+        <svg slot="icon" class="icon icon-lg">
+          <use href="/public/assets/icons/camping.svg#icon-campfire"></use>
+        </svg>
+        <div slot="">
+          <p><strong>Duration:</strong> 5-7 days</p>
+          <p><strong>Season:</strong> June - August</p>
+          <p><strong>Difficulty:</strong> Moderate</p>
+          <p style="margin-top: var(--spacing-md)">
+            <a href="yellowstone-summer-itinerary.html">View Itinerary →</a>
+          </p>
+        </div>
+        <span slot="link-text">View Trip Overview</span>
+      </card-element>
+
+      <card-element
+        title="Yosemite Fall"
+        description="Discover the beauty of Yosemite's autumn colors with fewer crowds and perfect hiking weather."
+        href="yosemite-fall-trip.html"
+      >
+        <svg slot="icon" class="icon icon-lg">
+          <use href="/public/assets/icons/camping.svg#icon-forest"></use>
+        </svg>
+        <div slot="">
+          <p><strong>Duration:</strong> 4-6 days</p>
+          <p><strong>Season:</strong> September - October</p>
+          <p><strong>Difficulty:</strong> Easy to Moderate</p>
+          <p style="margin-top: var(--spacing-md)">
+            <a href="yosemite-fall-itinerary.html">View Itinerary →</a>
+          </p>
+        </div>
+        <span slot="link-text">View Trip Overview</span>
+      </card-element>
+
+      <card-element
+        title="Resources"
+        description="Tools and guides to help you plan your own custom adventure."
+      >
+        <svg slot="icon" class="icon icon-lg">
+          <use href="/public/assets/icons/camping.svg#icon-tent"></use>
+        </svg>
+        <div slot="">
+          <ul>
+            <li><a href="itinerary.html">Itinerary Template</a></li>
+            <li>
+              <a href="../parks/yellowstone/index.html">Yellowstone Guide</a>
+            </li>
+            <li><a href="../parks/yosemite/index.html">Yosemite Guide</a></li>
+            <li><a href="../campers/camper.html">Car Camping</a></li>
+            <li><a href="../campers/backpacker.html">Backpacking</a></li>
+            <li><a href="../campers/bikepacker.html">Bikepacking</a></li>
+          </ul>
+        </div>
+      </card-element>
+    </card-grid>
+  </body>
+</html>

@@ -15,60 +15,13 @@ body {
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-base);
   margin: 0;
-  padding: var(--spacing-lg);
+  padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
 }
 
 /* Navigation styling */
-nav {
-  background-color: var(--color-background-header);
-  color: var(--color-text-inverted);
-  padding: var(--spacing-lg) var(--spacing-xl);
-  margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) var(--spacing-xl) calc(-1 * var(--spacing-lg));
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-  font-family: var(--font-family-primary);
-  font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-lg);
-
-  &>a:visited {
-    color: var(--color-text-inverted);
-  }
-}
-
-/* Breadcrumb container for wrapping */
-.breadcrumbs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-sm);
-}
-
-nav label {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-  cursor: pointer;
-  font-weight: var(--font-weight-semibold);
-}
-
-nav input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--color-accent);
-}
-
-nav a {
-  color: var(--color-text-inverted);
-  text-decoration: none;
-  font-weight: var(--font-weight-bold);
-}
-
-nav a:hover {
-  text-decoration: underline;
-  color: var(--color-text-inverted);
-}
-
-nav a:focus {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
+nav-element {
+  display: block;
+  margin: 0 0 var(--spacing-xl) 0;
 }
 
 /* Typography */
@@ -121,18 +74,20 @@ section {
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
   position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* Global Grid System */
-.grid-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-lg);
+/* Card component specific styles */
+card-grid {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.grid-section h2 {
-  grid-column: 1 / -1;
-  margin-bottom: var(--spacing-lg);
+card-element {
+  display: block;
+  box-sizing: border-box;
 }
 
 /* Flexbox Layout System for Sparse Content */
@@ -177,32 +132,7 @@ section {
   }
 }
 
-.card {
-  position: relative;
-  background-color: var(--color-background-card);
-  padding: var(--spacing-lg);
-  padding-top: calc(200px + var(--spacing-lg));
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
-}
 
-.card img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
-}
-
-.card:hover {
-  border-color: var(--color-accent);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
-}
 
 li strong {
   color: var(--color-accent);
@@ -311,10 +241,17 @@ section:target {
   body {
     padding: var(--spacing-lg);
   }
+}
 
-  nav {
-    padding: var(--spacing-sm) var(--spacing-md);
-    margin: calc(-1 * var(--spacing-lg)) calc(-1 * var(--spacing-lg)) var(--spacing-xl) calc(-1 * var(--spacing-lg));
-    font-size: var(--font-size-sm);
-  }
+/* Card list styles - applies to all cards with lists */
+[class*="-card"] ul,
+section ul {
+  list-style-type: disc;
+  margin-left: var(--spacing-lg);
+  padding-left: var(--spacing-sm);
+}
+
+[class*="-card"] li,
+section li {
+  margin-bottom: var(--spacing-xs);
 }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>National Parks</title>
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="/nav.ts"></script>
+    <script type="module" src="/card.ts"></script>
+    <script type="module" src="/section-header.ts"></script>
+  </head>
+  <body>
+    <nav-element>
+      <span slot="breadcrumb"> </span>
+      <a href="../index.html">Adventure Guide</a> → Parks</nav-element
+    >
+
+    <section-header title="National Parks" icon="forest"></section-header>
+    <p style="margin-bottom: var(--spacing-xl); color: var(--color-text-light)">
+      Explore America's treasured national parks
+    </p>
+
+    <card-grid columns="repeat(auto-fit, minmax(400px, 1fr))">
+      <card-element
+        title="Yellowstone National Park"
+        description="America's first national park with geysers, wildlife, and wilderness. Experience the wonders of Old Faithful, Grand Prismatic Spring, and incredible wildlife viewing opportunities."
+        href="yellowstone/"
+        clickable
+      >
+        <svg slot="icon" class="icon icon-md">
+          <use href="/public/assets/icons/camping.svg#icon-campfire"></use>
+        </svg>
+        <div slot="">
+          <p><strong>Established:</strong> 1872</p>
+          <p><strong>Size:</strong> 2.2 million acres</p>
+          <p><strong>Location:</strong> Wyoming, Montana, Idaho</p>
+
+          <h4>Quick Access:</h4>
+          <ul>
+            <li>
+              <a href="yellowstone/paths/grand-loop-road.html"
+                >Grand Loop Road</a
+              >
+            </li>
+            <li><a href="yellowstone/paths/trails.html">Hiking Trails</a></li>
+            <li><a href="yellowstone/poi/">Points of Interest</a></li>
+            <li><a href="yellowstone/campsites/">Campsites</a></li>
+          </ul>
+        </div>
+      </card-element>
+
+      <card-element
+        title="Yosemite National Park"
+        description="Granite cliffs, waterfalls, and giant sequoias in California's Sierra Nevada. Home to iconic Half Dome, El Capitan, and breathtaking Yosemite Falls."
+        href="yosemite/"
+        clickable
+      >
+        <svg slot="icon" class="icon icon-md">
+          <use href="/public/assets/icons/camping.svg#icon-forest"></use>
+        </svg>
+        <div slot="">
+          <p><strong>Established:</strong> 1890</p>
+          <p><strong>Size:</strong> 1,200 square miles</p>
+          <p><strong>Location:</strong> California, Sierra Nevada</p>
+
+          <h4>Quick Access:</h4>
+          <ul>
+            <li>
+              <a href="yosemite/paths/valley-loop-road.html"
+                >Valley Loop Road</a
+              >
+            </li>
+            <li>
+              <a href="yosemite/paths/glacier-point-road.html"
+                >Glacier Point Road</a
+              >
+            </li>
+            <li><a href="yosemite/paths/trails.html">Hiking Trails</a></li>
+            <li><a href="yosemite/campsites/">Campsites</a></li>
+          </ul>
+        </div>
+      </card-element>
+    </card-grid>
+  </body>
+</html>

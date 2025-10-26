@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>National Parks Adventure Guide</title>
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="/nav.ts"></script>
+    <script type="module" src="/card.ts"></script>
+    <script type="module" src="/section-header.ts"></script>
+  </head>
+  <body>
+    <nav-element>
+      <a href="../../index.html">Adventure Guide</a>
+    </nav-element>
+    <article id="main-content">
+      <h1>National Parks Adventure Guide</h1>
+
+      <section style="grid-column: 1 / -1">
+        <section-header title="Camper Types" icon="campervan"></section-header>
+        <card-grid columns="repeat(auto-fit, minmax(300px, 1fr))">
+          <card-element
+            title="Camper"
+            description="Traditional camping with car access and established campgrounds. Perfect for families and those who prefer comfort and convenience."
+            href="campers/camper.html"
+            clickable
+          >
+            <svg slot="icon" class="icon icon-md" viewBox="0 0 100 100">
+              <use href="/public/assets/icons/camping.svg#icon-campervan"></use>
+            </svg>
+          </card-element>
+
+          <card-element
+            title="Backpacker"
+            description="Wilderness camping with minimal gear carried on foot. Experience remote locations and pristine nature away from crowds."
+            href="campers/backpacker.html"
+            clickable
+          >
+            <svg slot="icon" class="icon icon-md">
+              <use href="/public/assets/icons/camping.svg#icon-backpack"></use>
+            </svg>
+          </card-element>
+
+          <card-element
+            title="Bikepacker"
+            description="Combine cycling and camping for unique adventures. Travel light while covering more ground than traditional backpacking."
+            href="campers/bikepacker.html"
+            clickable
+          >
+            <svg slot="icon" class="icon icon-md">
+              <use href="/public/assets/icons/camping.svg#icon-bike"></use>
+            </svg>
+          </card-element>
+        </card-grid>
+      </section>
+
+      <section style="grid-column: 1 / -1">
+        <section-header title="Trips" icon="path"></section-header>
+        <ul>
+          <li>
+            <a href="trips/yellowstone-summer-trip.html"
+              ><svg class="icon icon-md">
+                <use
+                  href="/public/assets/icons/camping.svg#icon-campfire"
+                ></use>
+              </svg>
+              Yellowstone Summer Adventure</a
+            >
+            (7 days)
+          </li>
+          <li>
+            <a href="trips/yosemite-fall-trip.html"
+              ><svg class="icon icon-md">
+                <use href="/public/assets/icons/camping.svg#icon-forest"></use>
+              </svg>
+              Yosemite Fall Colors</a
+            >
+            (4 days)
+          </li>
+          <li>
+            <a href="trips/itinerary.html"
+              ><svg class="icon icon-md">
+                <use href="/public/assets/icons/camping.svg#icon-path"></use>
+              </svg>
+              Trip Itineraries</a
+            >
+          </li>
+        </ul>
+      </section>
+
+      <section style="grid-column: 1 / -1">
+        <section-header title="Parks" icon="forest"></section-header>
+        <ul>
+          <li>
+            <a href="parks/"
+              ><svg class="icon icon-md">
+                <use href="/public/assets/icons/camping.svg#icon-path"></use>
+              </svg>
+              All National Parks</a
+            >
+          </li>
+          <li>
+            <a href="parks/yellowstone/"
+              ><svg class="icon icon-md">
+                <use
+                  href="/public/assets/icons/camping.svg#icon-campfire"
+                ></use>
+              </svg>
+              Yellowstone National Park</a
+            >
+          </li>
+          <li>
+            <a href="parks/yosemite/"
+              ><svg class="icon icon-md">
+                <use href="/public/assets/icons/camping.svg#icon-forest"></use>
+              </svg>
+              Yosemite National Park</a
+            >
+          </li>
+        </ul>
+      </section>
+    </article>
+  </body>
+</html>

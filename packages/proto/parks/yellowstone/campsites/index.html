@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yellowstone Campsites - Adventure Guide</title>
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="/nav.ts"></script>
+    <script type="module" src="/card.ts"></script>
+    <script type="module" src="/section-header.ts"></script>
+  </head>
+  <body>
+    <nav-element>
+      <span slot="breadcrumb"> </span>
+
+      <a href="../../../index.html">Adventure Guide</a> →
+      <a href="../../">Parks</a> → <a href="../index.html">Yellowstone</a> →
+      Campsites
+    </nav-element>
+
+    <section-header title="Yellowstone Campsites" icon="tent"></section-header>
+    <p style="margin-bottom: var(--spacing-xl); color: var(--color-text-light)">
+      Find your perfect camping spot in Yellowstone National Park.
+    </p>
+
+    <card-grid>
+      <card-element
+        title="Bridge Bay Site 001"
+        description="Lakefront camping with easy access to Yellowstone Lake."
+        href="bridge-bay-site-001.html"
+        image="https://www.nps.gov/yell/planyourvisit/images/bb.jpg"
+        image-alt="Bridge Bay Site 001"
+      >
+        <span slot="link-text">View Site Details</span>
+      </card-element>
+
+      <card-element
+        title="Backcountry Site 4B1"
+        description="Remote wilderness camping for experienced backpackers."
+        href="yellowstone-backcountry-site.html"
+        image="https://www.nps.gov/yell/planyourvisit/images/53169560539_d760f9c9e4_k.jpg?maxwidth=1300&maxheight=1300&autorotate=false&format=webp"
+        image-alt="Backcountry Site 4B1"
+      >
+        <span slot="link-text">View Site Details</span>
+      </card-element>
+    </card-grid>
+  </body>
+</html>
