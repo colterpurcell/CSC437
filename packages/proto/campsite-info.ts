@@ -35,11 +35,9 @@ class CampsiteInfo extends LitElement {
   @property({ type: String })
   description = "";
 
-  // Example of attribute with different property name
   @property({ attribute: "max-occupancy" })
   maxOccupancy = "";
 
-  // Example of attribute that sets CSS custom property
   @property({ attribute: "background-color" })
   backgroundColor = "";
 
