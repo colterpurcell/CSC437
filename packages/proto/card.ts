@@ -1,6 +1,23 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import reset from "./styles/reset.css.ts";
+
+interface CardData {
+  title?: string;
+  description?: string;
+  href?: string;
+  image?: string;
+  imageAlt?: string;
+  clickable?: boolean;
+  backgroundColor?: string;
+  borderColor?: string;
+  campsite?: {
+    name?: string;
+    capacity?: string;
+    location?: string;
+    description?: string;
+  };
+}
 
 @customElement("card-element")
 class CardElement extends LitElement {
@@ -22,14 +39,30 @@ class CardElement extends LitElement {
   @property({ type: Boolean })
   clickable = false;
 
-  @property({ type: String })
-  variant = "default";
-
   @property({ attribute: "background-color" })
   backgroundColor = "";
 
   @property({ attribute: "border-color" })
   borderColor = "";
+
+  @property({ type: String })
+  src?: string;
+
+  @state()
+  data: CardData | null = null;
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.src) this.hydrate(this.src);
+  }
+
+  hydrate(src: string) {
+    fetch(src)
+      .then((res) => res.json())
+      .then((json: CardData) => {
+        this.data = json;
+      });
+  }
 
   static styles = [
     reset.styles,
@@ -165,11 +198,22 @@ class CardElement extends LitElement {
   }
 
   render() {
+    const currentData = this.data || {
+      title: this.title,
+      description: this.description,
+      href: this.href,
+      image: this.image,
+      imageAlt: this.imageAlt,
+      clickable: this.clickable,
+      backgroundColor: this.backgroundColor,
+      borderColor: this.borderColor,
+    };
+    const { title, description, href, image, imageAlt, clickable, backgroundColor, borderColor } = currentData;
+
     const cardClasses = [
       "card",
-      this.image ? "has-image" : "",
-      this.clickable && this.href ? "clickable" : "",
-      this.variant,
+      image ? "has-image" : "",
+      clickable && href ? "clickable" : "",
     ]
       .filter(Boolean)
       .join(" ");
@@ -177,12 +221,12 @@ class CardElement extends LitElement {
     return html`
       <div class="${cardClasses}" @click=${this._handleCardClick}>
         <slot name="image">
-          ${this.image
+          ${image
             ? html`
                 <img
                   class="card-image"
-                  src="${this.image}"
-                  alt="${this.imageAlt || this.title}"
+                  src="${image}"
+                  alt="${imageAlt || title}"
                 />
               `
             : ""}
@@ -190,19 +234,19 @@ class CardElement extends LitElement {
 
         <div class="card-content">
           <slot name="header">
-            ${this.title
+            ${title
               ? html`
                   <h3 class="card-title">
                     <slot name="icon"></slot>
-                    <slot name="title">${this.title}</slot>
+                    <slot name="title">${title}</slot>
                   </h3>
                 `
               : ""}
           </slot>
 
           <slot name="description">
-            ${this.description
-              ? html` <p class="card-description">${this.description}</p> `
+            ${description
+              ? html` <p class="card-description">${description}</p> `
               : ""}
           </slot>
 
@@ -212,9 +256,9 @@ class CardElement extends LitElement {
           </div>
 
           <slot name="footer">
-            ${this.href && !this.clickable
+            ${href && !clickable
               ? html`
-                  <a class="card-link" href="${this.href}">
+                  <a class="card-link" href="${href}">
                     <slot name="link-text">Learn More</slot>
                     <span>→</span>
                   </a>

@@ -1,0 +1,68 @@
+{
+  "headers": {
+    "yosemite-poi": {
+      "title": "Yosemite Points of Interest",
+      "icon": "forest"
+    },
+    "yellowstone-poi": {
+      "title": "Yellowstone Points of Interest",
+      "icon": "forest"
+    },
+    "yellowstone-campsites": {
+      "title": "Yellowstone Campsites",
+      "icon": "tent"
+    },
+    "yellowstone-paths": {
+      "title": "Yellowstone Paths"
+    },
+    "yellowstone-park-info": {
+      "title": "Park Information",
+      "icon": "info",
+      "iconSize": "md"
+    },
+    "yellowstone-paths-section": {
+      "title": "Paths",
+      "icon": "path",
+      "iconSize": "md"
+    },
+    "yellowstone-poi-section": {
+      "title": "Points of Interest",
+      "iconSize": "md"
+    },
+    "yellowstone-campsites-section": {
+      "title": "Campsites",
+      "icon": "tent",
+      "iconSize": "md"
+    },
+    "yellowstone-featured-trips": {
+      "title": "Featured Trips"
+    },
+    "yosemite-paths": {
+      "title": "Yosemite Paths"
+    },
+    "trips": {
+      "title": "Trips",
+      "icon": "boot"
+    },
+    "yosemite-campsites": {
+      "title": "Yosemite Campsites",
+      "icon": "tent"
+    },
+    "national-parks": {
+      "title": "National Parks",
+      "icon": "forest"
+    },
+    "camper-types": {
+      "title": "Camper Types",
+      "icon": "campervan"
+    },
+    "trips-section": {
+      "title": "Trips",
+      "icon": "path"
+    },
+    "parks-section": {
+      "title": "Parks",
+      "icon": "forest"
+    }
+  }
+}

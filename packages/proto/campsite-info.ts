@@ -1,6 +1,25 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import reset from "./styles/reset.css.ts";
+
+interface CampsiteInfoData {
+  name?: string;
+  capacity?: string;
+  location?: string;
+  description?: string;
+  maxOccupancy?: string;
+  backgroundColor?: string;
+
+  card?: {
+    title?: string;
+    description?: string;
+    href?: string;
+  };
+}
+
+interface CampsiteInfoCollection {
+  campsites: { [key: string]: CampsiteInfoData };
+}
 
 @customElement("campsite-info")
 class CampsiteInfo extends LitElement {
@@ -24,9 +43,24 @@ class CampsiteInfo extends LitElement {
   @property({ attribute: "background-color" })
   backgroundColor = "";
 
-  // Example of attribute that affects styling/classes
   @property({ type: String })
-  variant = "default"; // could be "featured", "compact", etc.
+  src?: string;
+
+  @state()
+  data: CampsiteInfoData | null = null;
+
+  connectedCallback() {
+    super.connectedCallback();
+    if (this.src) this.hydrate(this.src);
+  }
+
+  hydrate(src: string) {
+    fetch(src)
+      .then((res) => res.json())
+      .then((json: CampsiteInfoData) => {
+        this.data = json;
+      });
+  }
 
   static styles = [
     reset.styles,
@@ -94,31 +128,38 @@ class CampsiteInfo extends LitElement {
   }
 
   render() {
-    const headerClass = `campsite-header ${this.variant}`;
+    const currentData = this.data || {
+      name: this.name,
+      capacity: this.capacity,
+      location: this.location,
+      description: this.description,
+      maxOccupancy: this.maxOccupancy,
+      backgroundColor: this.backgroundColor,
+    };
+    const { name, capacity, location, description, maxOccupancy } = currentData;
+    const headerClass = `campsite-header`;
 
     return html`
       <div class="${headerClass}">
         <h1>
-          <slot name="name">${this.name}</slot>
+          <slot name="name">${name}</slot>
         </h1>
 
         <div class="meta">
           <slot name="capacity">
-            ${this.capacity ? html`<span>${this.capacity}</span>` : ""}
+            ${capacity ? html`<span>${capacity}</span>` : ""}
           </slot>
           <slot name="location">
-            ${this.location ? html`<span>${this.location}</span>` : ""}
+            ${location ? html`<span>${location}</span>` : ""}
           </slot>
           <slot name="max-occupancy">
-            ${this.maxOccupancy
-              ? html`<span>Max: ${this.maxOccupancy}</span>`
-              : ""}
+            ${maxOccupancy ? html`<span>Max: ${maxOccupancy}</span>` : ""}
           </slot>
           <slot name="meta"></slot>
         </div>
 
         <slot name="description">
-          ${this.description ? html`<p>${this.description}</p>` : ""}
+          ${description ? html`<p>${description}</p>` : ""}
         </slot>
 
         <slot name="content"></slot>
