@@ -57,8 +57,8 @@ article {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: var(--spacing-md);
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--spacing-lg);
 }
 
 article>h1,
@@ -83,6 +83,7 @@ card-grid {
   display: block;
   width: 100%;
   box-sizing: border-box;
+  margin-bottom: var(--spacing-xl);
 }
 
 card-element {
@@ -94,7 +95,7 @@ card-element {
 .flex-section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
 }
 
 .flex-section.flex-row {
@@ -109,7 +110,7 @@ card-element {
 
 .flex-item {
   flex: 1;
-  min-width: 280px;
+  min-width: 320px;
   max-width: 100%;
 }
 

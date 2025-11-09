@@ -17,7 +17,7 @@
       <h1>National Parks Adventure Guide</h1>
 
       <section style="grid-column: 1 / -1">
-        <section-header src="/data/section-headers.json#camper-types"></section-header>
+        <section-header title="Camper Types" icon="campervan"></section-header>
         <card-grid columns="repeat(auto-fit, minmax(300px, 1fr))">
           <card-element
             title="Camper"
@@ -26,7 +26,7 @@
             clickable
           >
             <svg slot="icon" class="icon icon-md" viewBox="0 0 100 100">
-              <use href="/public/assets/icons/camping.svg#icon-campervan"></use>
+              <use href="/assets/icons/camping.svg#icon-campervan"></use>
             </svg>
           </card-element>
 
@@ -37,7 +37,7 @@
             clickable
           >
             <svg slot="icon" class="icon icon-md">
-              <use href="/public/assets/icons/camping.svg#icon-backpack"></use>
+              <use href="/assets/icons/camping.svg#icon-backpack"></use>
             </svg>
           </card-element>
 
@@ -48,21 +48,19 @@
             clickable
           >
             <svg slot="icon" class="icon icon-md">
-              <use href="/public/assets/icons/camping.svg#icon-bike"></use>
+              <use href="/assets/icons/camping.svg#icon-bike"></use>
             </svg>
           </card-element>
         </card-grid>
       </section>
 
       <section style="grid-column: 1 / -1">
-        <section-header src="/data/section-headers.json#trips-section"></section-header>
+        <section-header title="Trips" icon="path"></section-header>
         <ul>
           <li>
             <a href="trips/yellowstone-summer-trip.html"
               ><svg class="icon icon-md">
-                <use
-                  href="/public/assets/icons/camping.svg#icon-campfire"
-                ></use>
+                <use href="/assets/icons/camping.svg#icon-campfire"></use>
               </svg>
               Yellowstone Summer Adventure</a
             >
@@ -71,7 +69,7 @@
           <li>
             <a href="trips/yosemite-fall-trip.html"
               ><svg class="icon icon-md">
-                <use href="/public/assets/icons/camping.svg#icon-forest"></use>
+                <use href="/assets/icons/camping.svg#icon-forest"></use>
               </svg>
               Yosemite Fall Colors</a
             >
@@ -80,7 +78,7 @@
           <li>
             <a href="trips/itinerary.html"
               ><svg class="icon icon-md">
-                <use href="/public/assets/icons/camping.svg#icon-path"></use>
+                <use href="/assets/icons/camping.svg#icon-path"></use>
               </svg>
               Trip Itineraries</a
             >
@@ -89,36 +87,36 @@
       </section>
 
       <section style="grid-column: 1 / -1">
-        <section-header src="/data/section-headers.json#parks-section"></section-header>
-        <ul>
-          <li>
-            <a href="parks/"
-              ><svg class="icon icon-md">
-                <use href="/public/assets/icons/camping.svg#icon-path"></use>
-              </svg>
-              All National Parks</a
-            >
-          </li>
-          <li>
-            <a href="parks/yellowstone/"
-              ><svg class="icon icon-md">
-                <use
-                  href="/public/assets/icons/camping.svg#icon-campfire"
-                ></use>
-              </svg>
-              Yellowstone National Park</a
-            >
-          </li>
-          <li>
-            <a href="parks/yosemite/"
-              ><svg class="icon icon-md">
-                <use href="/public/assets/icons/camping.svg#icon-forest"></use>
-              </svg>
-              Yosemite National Park</a
-            >
-          </li>
-        </ul>
+        <section-header title="Parks" icon="forest"></section-header>
+        <p style="margin-bottom: var(--spacing-md)">
+          <a href="parks/">Browse all parks</a>
+        </p>
+        <card-grid
+          id="home-parks"
+          columns="repeat(auto-fit, minmax(300px, 1fr))"
+        ></card-grid>
       </section>
+      <script>
+        (async function () {
+          try {
+            const parks = await fetch("/api/parks").then((r) => r.json());
+            const grid = document.getElementById("home-parks");
+            parks.forEach((p) => {
+              const el = document.createElement("card-element");
+              el.setAttribute("title", p.card?.title || p.name);
+              el.setAttribute(
+                "description",
+                p.card?.description || p.description || ""
+              );
+              el.setAttribute("href", `/parks/${p.parkid}/index.html`);
+              el.setAttribute("clickable", "");
+              grid.appendChild(el);
+            });
+          } catch (e) {
+            // leave empty if API not available
+          }
+        })();
+      </script>
     </article>
   </body>
 </html>

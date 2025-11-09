@@ -39,12 +39,6 @@ class CardElement extends LitElement {
   @property({ type: Boolean })
   clickable = false;
 
-  @property({ attribute: "background-color" })
-  backgroundColor = "";
-
-  @property({ attribute: "border-color" })
-  borderColor = "";
-
   @property({ type: String })
   src?: string;
 
@@ -182,15 +176,6 @@ class CardElement extends LitElement {
     `,
   ];
 
-  updated() {
-    if (this.backgroundColor) {
-      this.style.setProperty("--card-bg-color", this.backgroundColor);
-    }
-    if (this.borderColor) {
-      this.style.setProperty("--card-border-color", this.borderColor);
-    }
-  }
-
   private _handleCardClick() {
     if (this.clickable && this.href) {
       window.location.href = this.href;
@@ -205,10 +190,8 @@ class CardElement extends LitElement {
       image: this.image,
       imageAlt: this.imageAlt,
       clickable: this.clickable,
-      backgroundColor: this.backgroundColor,
-      borderColor: this.borderColor,
     };
-    const { title, description, href, image, imageAlt, clickable, backgroundColor, borderColor } = currentData;
+    const { title, description, href, image, imageAlt, clickable } = currentData;
 
     const cardClasses = [
       "card",
@@ -321,6 +304,7 @@ class CardGrid extends LitElement {
       grid.style.gridTemplateColumns = columns;
       grid.style.gap = this.gap;
       grid.style.alignItems = this.alignment;
+      grid.style.justifyItems = 'stretch'; // Ensure cards stretch to fill available space
     }
   }
 

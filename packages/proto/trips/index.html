@@ -15,10 +15,46 @@
       <a href="../index.html">Adventure Guide</a> → Trips</nav-element
     >
 
-    <section-header src="/data/section-headers.json#trips"></section-header>
+    <section-header title="Trips" icon="boot"></section-header>
     <p style="margin-bottom: var(--spacing-xl); color: var(--color-text-light)">
       Plan your perfect adventure with our curated trip packages and resources.
     </p>
+
+    <section
+      style="
+        background-color: var(--color-background-page);
+        padding: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+        border-radius: var(--radius-lg);
+      "
+    >
+      <h2 style="margin-top: 0">Why Choose Our Trips?</h2>
+      <div class="flex-section flex-row">
+        <div class="flex-item">
+          <h3>Expert Planning</h3>
+          <p>
+            Our trips are planned by experienced outdoor enthusiasts who know
+            the best routes, campsites, and seasonal conditions for each
+            destination.
+          </p>
+        </div>
+        <div class="flex-item">
+          <h3>Flexible Options</h3>
+          <p>
+            Whether you're a car camper, backpacker, or bikepacker, we offer
+            trip options that match your preferred style of travel.
+          </p>
+        </div>
+        <div class="flex-item">
+          <h3>Comprehensive Guides</h3>
+          <p>
+            Each trip includes detailed itineraries, park guides, and resource
+            links to ensure you have everything you need for a successful
+            adventure.
+          </p>
+        </div>
+      </div>
+    </section>
 
     <card-grid>
       <card-element
@@ -27,7 +63,7 @@
         href="yellowstone-summer-trip.html"
       >
         <svg slot="icon" class="icon icon-lg">
-          <use href="/public/assets/icons/camping.svg#icon-campfire"></use>
+          <use href="/assets/icons/camping.svg#icon-campfire"></use>
         </svg>
         <div slot="">
           <p><strong>Duration:</strong> 5-7 days</p>
@@ -46,7 +82,7 @@
         href="yosemite-fall-trip.html"
       >
         <svg slot="icon" class="icon icon-lg">
-          <use href="/public/assets/icons/camping.svg#icon-forest"></use>
+          <use href="/assets/icons/camping.svg#icon-forest"></use>
         </svg>
         <div slot="">
           <p><strong>Duration:</strong> 4-6 days</p>
@@ -64,15 +100,15 @@
         description="Tools and guides to help you plan your own custom adventure."
       >
         <svg slot="icon" class="icon icon-lg">
-          <use href="/public/assets/icons/camping.svg#icon-tent"></use>
+          <use href="/assets/icons/camping.svg#icon-tent"></use>
         </svg>
         <div slot="">
           <ul>
             <li><a href="itinerary.html">Itinerary Template</a></li>
             <li>
-              <a href="../parks/yellowstone/index.html">Yellowstone Guide</a>
+              <a href="/parks/yell/index.html">Yellowstone Guide</a>
             </li>
-            <li><a href="../parks/yosemite/index.html">Yosemite Guide</a></li>
+            <li><a href="/parks/yose/index.html">Yosemite Guide</a></li>
             <li><a href="../campers/camper.html">Car Camping</a></li>
             <li><a href="../campers/backpacker.html">Backpacking</a></li>
             <li><a href="../campers/bikepacker.html">Bikepacking</a></li>

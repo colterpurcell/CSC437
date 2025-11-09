@@ -1,0 +1,39 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="roadGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#696969;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2F2F2F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky background -->
+  <rect width="400" height="120" fill="url(#skyGradient)" />
+
+  <!-- Mountains -->
+  <path d="M0 120 L80 60 L160 80 L240 40 L320 70 L400 50 L400 120 Z" fill="#8B7355" />
+  <path d="M40 120 L120 50 L200 65 L280 25 L360 45 L400 35 L400 120 Z" fill="#A0522D" />
+
+  <!-- Valley floor -->
+  <rect y="120" width="400" height="40" fill="#228B22" />
+
+  <!-- Winding road -->
+  <path d="M0 150 Q100 140 200 150 Q300 160 400 150" stroke="url(#roadGradient)" stroke-width="20"
+    fill="none" />
+  <path d="M0 150 Q100 140 200 150 Q300 160 400 150" stroke="white" stroke-width="2" fill="none"
+    stroke-dasharray="10,5" />
+
+  <!-- Trees -->
+  <circle cx="60" cy="140" r="15" fill="#006400" />
+  <circle cx="140" cy="135" r="18" fill="#228B22" />
+  <circle cx="220" cy="145" r="12" fill="#32CD32" />
+  <circle cx="300" cy="138" r="16" fill="#228B22" />
+
+  <!-- Text overlay -->
+  <rect x="10" y="10" width="220" height="30" fill="rgba(0,0,0,0.7)" rx="5" />
+  <text x="20" y="30" fill="white" font-family="Arial" font-size="16" font-weight="bold">Valley Loop
+    Road</text>
+</svg>

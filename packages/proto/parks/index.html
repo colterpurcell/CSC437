@@ -15,71 +15,161 @@
       <a href="../index.html">Adventure Guide</a> → Parks</nav-element
     >
 
-    <section-header src="/data/section-headers.json#national-parks"></section-header>
+    <section-header
+      title="National Parks"
+      subtitle="Explore America's treasured national parks"
+    ></section-header>
     <p style="margin-bottom: var(--spacing-xl); color: var(--color-text-light)">
       Explore America's treasured national parks
     </p>
 
-    <card-grid columns="repeat(auto-fit, minmax(400px, 1fr))">
-      <card-element
-        title="Yellowstone National Park"
-        description="America's first national park with geysers, wildlife, and wilderness. Experience the wonders of Old Faithful, Grand Prismatic Spring, and incredible wildlife viewing opportunities."
-        href="yellowstone/"
-        clickable
-      >
-        <svg slot="icon" class="icon icon-md">
-          <use href="/public/assets/icons/camping.svg#icon-campfire"></use>
-        </svg>
-        <div slot="">
-          <p><strong>Established:</strong> 1872</p>
-          <p><strong>Size:</strong> 2.2 million acres</p>
-          <p><strong>Location:</strong> Wyoming, Montana, Idaho</p>
-
-          <h4>Quick Access:</h4>
-          <ul>
-            <li>
-              <a href="yellowstone/paths/grand-loop-road.html"
-                >Grand Loop Road</a
-              >
-            </li>
-            <li><a href="yellowstone/paths/trails.html">Hiking Trails</a></li>
-            <li><a href="yellowstone/poi/">Points of Interest</a></li>
-            <li><a href="yellowstone/campsites/">Campsites</a></li>
-          </ul>
+    <section
+      style="
+        background-color: var(--color-background-page);
+        padding: var(--spacing-lg);
+        margin-bottom: var(--spacing-xl);
+        border-radius: var(--radius-lg);
+      "
+    >
+      <h2 style="margin-top: 0">Why Visit National Parks?</h2>
+      <div class="flex-section flex-row">
+        <div class="flex-item">
+          <h3>Natural Wonders</h3>
+          <p>
+            Experience breathtaking landscapes, diverse wildlife, and geological
+            formations that tell the story of our planet's history.
+          </p>
         </div>
-      </card-element>
-
-      <card-element
-        title="Yosemite National Park"
-        description="Granite cliffs, waterfalls, and giant sequoias in California's Sierra Nevada. Home to iconic Half Dome, El Capitan, and breathtaking Yosemite Falls."
-        href="yosemite/"
-        clickable
-      >
-        <svg slot="icon" class="icon icon-md">
-          <use href="/public/assets/icons/camping.svg#icon-forest"></use>
-        </svg>
-        <div slot="">
-          <p><strong>Established:</strong> 1890</p>
-          <p><strong>Size:</strong> 1,200 square miles</p>
-          <p><strong>Location:</strong> California, Sierra Nevada</p>
-
-          <h4>Quick Access:</h4>
-          <ul>
-            <li>
-              <a href="yosemite/paths/valley-loop-road.html"
-                >Valley Loop Road</a
-              >
-            </li>
-            <li>
-              <a href="yosemite/paths/glacier-point-road.html"
-                >Glacier Point Road</a
-              >
-            </li>
-            <li><a href="yosemite/paths/trails.html">Hiking Trails</a></li>
-            <li><a href="yosemite/campsites/">Campsites</a></li>
-          </ul>
+        <div class="flex-item">
+          <h3>Conservation Legacy</h3>
+          <p>
+            These protected areas preserve America's natural heritage, providing
+            sanctuary for wildlife and opportunities for scientific research.
+          </p>
         </div>
-      </card-element>
-    </card-grid>
+        <div class="flex-item">
+          <h3>Adventure & Recreation</h3>
+          <p>
+            From hiking and camping to wildlife viewing and photography,
+            national parks offer endless opportunities for outdoor exploration.
+          </p>
+        </div>
+      </div>
+
+      <div style="margin-top: var(--spacing-xl)">
+        <h3>Park Categories</h3>
+        <div class="flex-section flex-row">
+          <div class="flex-item flex-shrink">
+            <div
+              style="
+                background: var(--color-background-card);
+                padding: var(--spacing-md);
+                border-radius: var(--radius-md);
+                border: 1px solid var(--color-border);
+              "
+            >
+              <h4 style="margin-top: 0">
+                <svg class="icon icon-sm">
+                  <use href="/assets/icons/camping.svg#icon-mountain"></use>
+                </svg>
+                Mountains & Valleys
+              </h4>
+              <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
+                Yosemite, Yellowstone, Rocky Mountain
+              </p>
+            </div>
+          </div>
+          <div class="flex-item flex-shrink">
+            <div
+              style="
+                background: var(--color-background-card);
+                padding: var(--spacing-md);
+                border-radius: var(--radius-md);
+                border: 1px solid var(--color-border);
+              "
+            >
+              <h4 style="margin-top: 0">
+                <svg class="icon icon-sm">
+                  <use href="/assets/icons/camping.svg#icon-tent"></use>
+                </svg>
+                Deserts & Canyons
+              </h4>
+              <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
+                Grand Canyon, Joshua Tree, Zion
+              </p>
+            </div>
+          </div>
+          <div class="flex-item flex-shrink">
+            <div
+              style="
+                background: var(--color-background-card);
+                padding: var(--spacing-md);
+                border-radius: var(--radius-md);
+                border: 1px solid var(--color-border);
+              "
+            >
+              <h4 style="margin-top: 0">
+                <svg class="icon icon-sm">
+                  <use href="/assets/icons/camping.svg#icon-lake"></use>
+                </svg>
+                Coasts & Islands
+              </h4>
+              <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
+                Acadia, Olympic, Channel Islands
+              </p>
+            </div>
+          </div>
+          <div class="flex-item flex-shrink">
+            <div
+              style="
+                background: var(--color-background-card);
+                padding: var(--spacing-md);
+                border-radius: var(--radius-md);
+                border: 1px solid var(--color-border);
+              "
+            >
+              <h4 style="margin-top: 0">
+                <svg class="icon icon-sm">
+                  <use href="/assets/icons/camping.svg#icon-forest"></use>
+                </svg>
+                Forests & Wetlands
+              </h4>
+              <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
+                Everglades, Redwood, Great Smoky Mountains
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <card-grid
+      id="parks"
+      columns="repeat(auto-fit, minmax(350px, 1fr))"
+    ></card-grid>
+
+    <script>
+      (async function () {
+        const parks = await fetch("/api/parks")
+          .then((r) => r.json())
+          .catch(() => []);
+        const grid = document.getElementById("parks");
+        parks.forEach((p) => {
+          const el = document.createElement("card-element");
+          el.setAttribute("title", p.card?.title || p.name);
+          el.setAttribute(
+            "description",
+            p.card?.description || p.description || ""
+          );
+          el.setAttribute("href", `/parks/${p.parkid}/index.html`);
+          el.setAttribute("clickable", "");
+          if (p.card?.image) {
+            el.setAttribute("image", p.card.image);
+            el.setAttribute("image-alt", p.card.imageAlt || p.name);
+          }
+          grid.appendChild(el);
+        });
+      })();
+    </script>
   </body>
 </html>

@@ -1,0 +1,47 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4169E1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#87CEEB;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="mountainGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#778899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2F4F4F;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Sky background -->
+  <rect width="400" height="150" fill="url(#skyGradient)" />
+
+  <!-- High mountains -->
+  <path d="M0 150 L60 50 L120 70 L180 30 L240 60 L300 20 L360 40 L400 25 L400 150 Z"
+    fill="url(#mountainGradient)" />
+
+  <!-- Snow caps -->
+  <path d="M55 55 L65 55 L60 50 Z" fill="white" />
+  <path d="M175 35 L185 35 L180 30 Z" fill="white" />
+  <path d="M295 25 L305 25 L300 20 Z" fill="white" />
+
+  <!-- Cliff face -->
+  <rect y="150" width="400" height="30" fill="#8B7D6B" />
+
+  <!-- Winding mountain road -->
+  <path d="M0 170 Q50 165 100 170 Q150 175 200 170 Q250 165 300 170 Q350 175 400 170"
+    stroke="#696969" stroke-width="15" fill="none" />
+  <path d="M0 170 Q50 165 100 170 Q150 175 200 170 Q250 165 300 170 Q350 175 400 170"
+    stroke="yellow" stroke-width="2" fill="none" stroke-dasharray="8,4" />
+
+  <!-- Guardrail -->
+  <path d="M0 165 Q50 160 100 165 Q150 170 200 165 Q250 160 300 165 Q350 170 400 165"
+    stroke="#C0C0C0" stroke-width="3" fill="none" />
+
+  <!-- Pine trees on mountainside -->
+  <polygon points="80,140 85,125 90,140" fill="#006400" />
+  <polygon points="220,130 225,115 230,130" fill="#228B22" />
+  <polygon points="320,135 325,120 330,135" fill="#006400" />
+
+  <!-- Text overlay -->
+  <rect x="10" y="10" width="240" height="30" fill="rgba(0,0,0,0.8)" rx="5" />
+  <text x="20" y="30" fill="white" font-family="Arial" font-size="16" font-weight="bold">Glacier
+    Point Road</text>
+</svg>

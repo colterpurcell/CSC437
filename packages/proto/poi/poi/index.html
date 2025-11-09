@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Point of Interest</title>
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="/nav.ts"></script>
+    <script type="module" src="/section-header.ts"></script>
+  </head>
+  <body>
+    <nav-element>
+      <span slot="breadcrumb"></span>
+      <a href="/index.html">Adventure Guide</a> →
+      <a href="/parks/index.html">Parks</a> →
+      <a id="park-link" href="#">Park</a> →
+      <span id="poi-name">Point of Interest</span>
+    </nav-element>
+
+    <section-header id="poi-header"></section-header>
+    <div id="details" class="panel"></div>
+
+    <script>
+      (async function () {
+        const parts = location.pathname.split("/").filter(Boolean);
+        // /poi/{poiid}.html
+        const poiid = parts[1]?.replace(/\.html$/, "");
+        if (!poiid) return;
+
+        const poi = await fetch(`/api/poi/${poiid}`)
+          .then((r) => r.json())
+          .catch(() => null);
+        if (!poi) return;
+
+        // Breadcrumb park link
+        const parkLink = document.getElementById("park-link");
+        parkLink.setAttribute("href", `/parks/${poi.park}/index.html`);
+        parkLink.textContent = poi.parkName || poi.park;
+
+        // Header
+        const header = document.getElementById("poi-header");
+        header.setAttribute("title", poi.name);
+        header.setAttribute("icon", poi.type === "campground" ? "tent" : "pin");
+        header.setAttribute("iconSize", "lg");
+
+        document.getElementById("poi-name").textContent = poi.name;
+
+        const details = document.getElementById("details");
+        details.innerHTML = `
+          <p class="lead">${poi.description || ""}</p>
+          <div class="meta-row">
+            <span class="chip">
+              <svg class="icon icon-sm"><use href="/assets/icons/camping.svg#icon-pin"></use></svg>
+              ${poi.type}
+            </span>
+            <span class="chip">
+              <svg class="icon icon-sm"><use href="/assets/icons/camping.svg#icon-forest"></use></svg>
+              Park: ${poi.parkName || poi.park}
+            </span>
+          </div>
+        `;
+      })();
+    </script>
+
+    <style>
+      .panel {
+        margin-top: var(--spacing-lg);
+        padding: var(--spacing-lg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-background-card);
+      }
+      .lead {
+        color: var(--color-text-light);
+        margin-bottom: var(--spacing-md);
+      }
+      .meta-row {
+        display: flex;
+        gap: var(--spacing-sm);
+        flex-wrap: wrap;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        padding: 4px 8px;
+        border: 1px solid var(--color-border);
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        color: var(--color-text);
+        background: var(--color-background);
+      }
+      .icon-sm {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+    </style>
+  </body>
+</html>

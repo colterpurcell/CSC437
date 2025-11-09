@@ -3,6 +3,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import reset from "./styles/reset.css.ts";
 
 interface CampsiteInfoData {
+  siteid?: string;
   name?: string;
   capacity?: string;
   location?: string;
@@ -15,10 +16,6 @@ interface CampsiteInfoData {
     description?: string;
     href?: string;
   };
-}
-
-interface CampsiteInfoCollection {
-  campsites: { [key: string]: CampsiteInfoData };
 }
 
 @customElement("campsite-info")
@@ -34,12 +31,6 @@ class CampsiteInfo extends LitElement {
 
   @property({ type: String })
   description = "";
-
-  @property({ attribute: "max-occupancy" })
-  maxOccupancy = "";
-
-  @property({ attribute: "background-color" })
-  backgroundColor = "";
 
   @property({ type: String })
   src?: string;
@@ -119,22 +110,14 @@ class CampsiteInfo extends LitElement {
     `,
   ];
 
-  updated() {
-    if (this.backgroundColor) {
-      this.style.setProperty("--campsite-bg-color", this.backgroundColor);
-    }
-  }
-
   render() {
     const currentData = this.data || {
       name: this.name,
       capacity: this.capacity,
       location: this.location,
       description: this.description,
-      maxOccupancy: this.maxOccupancy,
-      backgroundColor: this.backgroundColor,
     };
-    const { name, capacity, location, description, maxOccupancy } = currentData;
+    const { name, capacity, location, description } = currentData;
     const headerClass = `campsite-header`;
 
     return html`
@@ -149,9 +132,6 @@ class CampsiteInfo extends LitElement {
           </slot>
           <slot name="location">
             ${location ? html`<span>${location}</span>` : ""}
-          </slot>
-          <slot name="max-occupancy">
-            ${maxOccupancy ? html`<span>Max: ${maxOccupancy}</span>` : ""}
           </slot>
           <slot name="meta"></slot>
         </div>

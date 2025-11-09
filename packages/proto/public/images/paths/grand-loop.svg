@@ -1,0 +1,53 @@
+<svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E0F6FF;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="geyserGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFE4B5;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#F0E68C;stop-opacity:0.3" />
+    </radialGradient>
+  </defs>
+
+  <!-- Sky background -->
+  <rect width="400" height="120" fill="url(#skyGradient)" />
+
+  <!-- Rolling hills -->
+  <path d="M0 120 Q100 100 200 120 Q300 100 400 120 L400 160 L0 160 Z" fill="#9ACD32" />
+
+  <!-- Ground -->
+  <rect y="160" width="400" height="40" fill="#8FBC8F" />
+
+  <!-- Grand Loop Road -->
+  <ellipse cx="200" cy="150" rx="180" ry="25" fill="#696969" />
+  <ellipse cx="200" cy="150" rx="160" ry="20" fill="#2F2F2F" />
+
+  <!-- Road markings -->
+  <ellipse cx="200" cy="150" rx="160" ry="2" fill="white" opacity="0.8" />
+
+  <!-- Geysers and hot springs -->
+  <circle cx="120" cy="140" r="8" fill="#4682B4" opacity="0.6" />
+  <circle cx="280" cy="145" r="6" fill="#4682B4" opacity="0.6" />
+
+  <!-- Steam from geysers -->
+  <ellipse cx="120" cy="120" rx="15" ry="30" fill="url(#geyserGradient)" />
+  <ellipse cx="280" cy="125" rx="12" ry="25" fill="url(#geyserGradient)" />
+
+  <!-- Pine trees -->
+  <polygon points="60,150 65,130 70,150" fill="#006400" />
+  <polygon points="180,140 185,120 190,140" fill="#228B22" />
+  <polygon points="320,145 325,125 330,145" fill="#006400" />
+  <polygon points="340,150 345,130 350,150" fill="#228B22" />
+
+  <!-- Bison silhouette -->
+  <ellipse cx="250" cy="135" rx="20" ry="8" fill="#2F1B14" />
+  <circle cx="245" cy="132" r="4" fill="#2F1B14" />
+  <rect x="240" y="130" width="2" height="6" fill="#2F1B14" />
+  <rect x="255" y="130" width="2" height="6" fill="#2F1B14" />
+
+  <!-- Text overlay -->
+  <rect x="10" y="10" width="220" height="30" fill="rgba(0,0,0,0.7)" rx="5" />
+  <text x="20" y="30" fill="white" font-family="Arial" font-size="16" font-weight="bold">Grand Loop
+    Road</text>
+</svg>

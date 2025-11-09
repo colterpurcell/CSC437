@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Park</title>
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="/nav.ts"></script>
+    <script type="module" src="/card.ts"></script>
+    <script type="module" src="/section-header.ts"></script>
+  </head>
+  <body>
+    <nav-element>
+      <span slot="breadcrumb"></span>
+      <a href="/index.html">Adventure Guide</a> →
+      <a href="/parks/index.html">Parks</a> → <span id="park-name">Park</span>
+    </nav-element>
+
+    <section-header id="park-header"></section-header>
+    <div class="meta-row" id="park-meta"></div>
+    <p id="park-description" class="lead"></p>
+
+    <h2 id="campsites" style="margin-top: var(--spacing-xl)">Campsites</h2>
+    <card-grid
+      id="campsites"
+      columns="repeat(auto-fit, minmax(350px, 1fr))"
+      max-columns="3"
+    ></card-grid>
+
+    <h2 id="poi" style="margin-top: var(--spacing-xl)">Points of Interest</h2>
+    <card-grid
+      id="poi"
+      columns="repeat(auto-fit, minmax(350px, 1fr))"
+      max-columns="3"
+    ></card-grid>
+
+    <h2 style="margin-top: var(--spacing-xl)">Paths</h2>
+    <section id="roads">
+      <section-header
+        title="Scenic Roads"
+        subtitle="Drive-through vistas and major connectors"
+      ></section-header>
+      <card-grid
+        id="roads"
+        columns="repeat(auto-fit, minmax(350px, 1fr))"
+        max-columns="3"
+      ></card-grid>
+    </section>
+    <section id="trails">
+      <section-header
+        title="Trails"
+        subtitle="Hiking routes and backcountry access"
+      ></section-header>
+      <card-grid
+        id="trails"
+        columns="repeat(auto-fit, minmax(350px, 1fr))"
+        max-columns="3"
+      ></card-grid>
+    </section>
+
+    <script>
+      (async function () {
+        const parkid = location.pathname.split("/").filter(Boolean)[1]; // /parks/{parkid}/index.html
+        if (!parkid) return;
+
+        // Park details
+        const park = await fetch(`/api/parks/${parkid}`)
+          .then((r) => r.json())
+          .catch(() => null);
+        if (park) {
+          document.getElementById("park-name").textContent = park.name;
+          const header = document.getElementById("park-header");
+          header.setAttribute("title", park.name);
+          header.setAttribute(
+            "subtitle",
+            `${park.location} • Est. ${park.established} • ${park.size}`
+          );
+          document.getElementById("park-description").textContent =
+            park.description;
+
+          const meta = document.getElementById("park-meta");
+          meta.innerHTML = `
+            <span class="chip">
+              <svg class="icon icon-sm"><use href="/assets/icons/camping.svg#icon-forest"></use></svg>
+              ${park.location}
+            </span>
+            <span class="chip">
+              <svg class="icon icon-sm"><use href="/assets/icons/camping.svg#icon-calendar"></use></svg>
+              Est. ${park.established}
+            </span>
+            <span class="chip">
+              <svg class="icon icon-sm"><use href="/assets/icons/camping.svg#icon-tent"></use></svg>
+              ${park.size}
+            </span>
+          `;
+        }
+
+        // Campsites
+        const campsites = await fetch(
+          `/api/campsites?park=${encodeURIComponent(parkid)}`
+        )
+          .then((r) => r.json())
+          .catch(() => []);
+        const campsiteGrid = document.getElementById("campsites");
+        campsites.forEach((c) => {
+          const el = document.createElement("card-element");
+          el.setAttribute("title", c.card?.title || c.name);
+          el.setAttribute(
+            "description",
+            c.card?.description || c.description || ""
+          );
+          el.setAttribute("href", `/campsites/${c.siteid}.html`);
+          el.setAttribute("clickable", "");
+          if (c.card?.image) {
+            el.setAttribute("image", c.card.image);
+            el.setAttribute("image-alt", c.card.imageAlt || c.name);
+          }
+          campsiteGrid.appendChild(el);
+        });
+
+        // POI
+        const poi = await fetch(`/api/poi?park=${encodeURIComponent(parkid)}`)
+          .then((r) => r.json())
+          .catch(() => []);
+        const poiGrid = document.getElementById("poi");
+        poi.forEach((p) => {
+          const el = document.createElement("card-element");
+          el.setAttribute("title", p.card?.title || p.name);
+          el.setAttribute(
+            "description",
+            p.card?.description || p.description || ""
+          );
+          el.setAttribute("href", `/poi/${p.poiid}.html`);
+          el.setAttribute("clickable", "");
+          if (p.card?.image) {
+            el.setAttribute("image", p.card.image);
+            el.setAttribute("image-alt", p.card.imageAlt || p.name);
+          }
+          poiGrid.appendChild(el);
+        });
+
+        // Paths
+        const paths = await fetch(
+          `/api/paths?park=${encodeURIComponent(parkid)}`
+        )
+          .then((r) => r.json())
+          .catch(() => []);
+        const roadsGrid = document.getElementById("roads");
+        const trailsGrid = document.getElementById("trails");
+        paths.forEach((p) => {
+          const el = document.createElement("card-element");
+          el.setAttribute("title", p.card?.title || p.name);
+          el.setAttribute(
+            "description",
+            p.card?.description || p.description || ""
+          );
+          el.setAttribute("href", `/paths/${p.pathid}.html`);
+          el.setAttribute("clickable", "");
+
+          // Add image if available
+          if (p.card?.image || p.image) {
+            el.setAttribute("image", p.card?.image || p.image);
+            el.setAttribute(
+              "image-alt",
+              p.card?.imageAlt || p.imageAlt || p.name
+            );
+          } else {
+            // Fallback to icon if no image
+            const icon = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "svg"
+            );
+            icon.setAttribute("slot", "icon");
+            icon.setAttribute("class", "icon icon-md");
+            const use = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "use"
+            );
+            use.setAttribute(
+              "href",
+              p.type === "road"
+                ? "/assets/icons/camping.svg#icon-road"
+                : "/assets/icons/camping.svg#icon-hiking"
+            );
+            icon.appendChild(use);
+            el.appendChild(icon);
+          }
+
+          (p.type === "road" ? roadsGrid : trailsGrid).appendChild(el);
+        });
+      })();
+    </script>
+    <style>
+      .lead {
+        margin-bottom: var(--spacing-xl);
+        color: var(--color-text-light);
+      }
+      .meta-row {
+        display: flex;
+        gap: var(--spacing-sm);
+        flex-wrap: wrap;
+        margin-bottom: var(--spacing-md);
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        padding: 4px 8px;
+        border: 1px solid var(--color-border);
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        color: var(--color-text);
+        background: var(--color-background-card);
+      }
+      .icon-sm {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+    </style>
+  </body>
+</html>

@@ -36,11 +36,11 @@ class SectionHeader extends LitElement {
 
   hydrate(src: string) {
     // Handle JSON fragment references like /data/section-headers.json#yosemite-poi
-    const [url, fragment] = src.split('#');
+    const [url, fragment] = src.split("#");
     fetch(url)
       .then((res) => res.json())
       .then((json: SectionHeaderData | SectionHeadersCollection) => {
-        if (fragment && 'headers' in json) {
+        if (fragment && "headers" in json) {
           // It's a collection, get the specific header
           this.data = json.headers[fragment];
         } else {
@@ -125,9 +125,7 @@ class SectionHeader extends LitElement {
                   class="icon icon-${iconSize || "lg"}"
                   viewBox="0 0 100 100"
                 >
-                  <use
-                    href="/public/assets/icons/camping.svg#icon-${icon}"
-                  ></use>
+                  <use href="/assets/icons/camping.svg#icon-${icon}"></use>
                 </svg>
               `
             : ""}

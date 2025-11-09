@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Path</title>
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="/nav.ts"></script>
+    <script type="module" src="/section-header.ts"></script>
+    <script type="module" src="/card.ts"></script>
+  </head>
+  <body>
+    <nav-element>
+      <span slot="breadcrumb"></span>
+      <a href="/index.html">Adventure Guide</a> →
+      <a href="/parks/index.html">Parks</a> →
+      <a id="park-link" href="#">Park</a> →
+      <span id="path-name">Path</span>
+    </nav-element>
+
+    <section-header id="path-header"></section-header>
+    <div id="details" class="panel"></div>
+
+    <script>
+      (async function () {
+        const parts = location.pathname.split("/").filter(Boolean);
+        // /paths/{pathid}.html
+        const pathid = parts[1]?.replace(/\.html$/, "");
+        console.log("Path parts:", parts, "Extracted pathid:", pathid);
+        if (!pathid) {
+          console.log("No pathid found, exiting");
+          return;
+        }
+
+        const path = await fetch(`/api/paths/${pathid}`)
+          .then((r) => r.json())
+          .catch((err) => {
+            console.error("Failed to fetch path data:", err);
+            return null;
+          });
+        console.log("Fetched path data:", path);
+        if (!path) {
+          console.log("No path data received");
+          return;
+        }
+
+        // Breadcrumb park link
+        const parkLink = document.getElementById("park-link");
+        parkLink.setAttribute("href", `/parks/${path.park}/index.html`);
+        parkLink.textContent = path.parkName || path.park;
+
+        // Header
+        const header = document.getElementById("path-header");
+        header.setAttribute("title", path.name);
+        header.setAttribute("icon", path.type === "road" ? "road" : "hiking");
+        header.setAttribute("iconSize", "lg");
+
+        document.getElementById("path-name").textContent = path.name;
+
+        const details = document.getElementById("details");
+        details.innerHTML = `
+          ${
+            path.image
+              ? `
+            <div class="path-image">
+              <img src="${path.image}" alt="${path.imageAlt || path.name}" />
+            </div>
+          `
+              : ""
+          }
+          <p class="lead">${path.description || ""}</p>
+          <div class="meta-row">
+            <span class="chip">
+              <svg class="icon icon-sm"><use href="/assets/icons/camping.svg#${
+                path.type === "road" ? "icon-road" : "icon-hiking"
+              }"></use></svg>
+              ${path.type === "road" ? "Scenic Road" : "Trail"}
+            </span>
+            <span class="chip">
+              <svg class="icon icon-sm"><use href="/assets/icons/camping.svg#icon-forest"></use></svg>
+              Park: ${path.parkName || path.park}
+            </span>
+          </div>
+        `;
+      })();
+    </script>
+
+    <style>
+      .panel {
+        margin-top: var(--spacing-lg);
+        padding: var(--spacing-lg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-background-card);
+      }
+      .path-image {
+        margin-bottom: var(--spacing-lg);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+      }
+      .path-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: var(--radius-md);
+      }
+      .lead {
+        color: var(--color-text-light);
+        margin-bottom: var(--spacing-md);
+      }
+      .meta-row {
+        display: flex;
+        gap: var(--spacing-sm);
+        flex-wrap: wrap;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-xs);
+        padding: 4px 8px;
+        border: 1px solid var(--color-border);
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        color: var(--color-text);
+        background: var(--color-background);
+      }
+      .icon-sm {
+        width: 16px;
+        height: 16px;
+        fill: currentColor;
+      }
+    </style>
+  </body>
+</html>
