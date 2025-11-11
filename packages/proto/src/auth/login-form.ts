@@ -102,6 +102,34 @@ export class LoginFormElement extends LitElement {
         margin-top: var(--spacing-lg);
       }
 
+      ::slotted(button[type="submit"]),
+      ::slotted(button[type="button"]) {
+        background-color: var(--color-accent);
+        color: var(--color-text-inverted);
+        border: none;
+        padding: var(--spacing-md) var(--spacing-xl);
+        border-radius: var(--radius-md);
+        font-size: var(--font-size-base);
+        font-weight: var(--font-weight-semibold);
+        font-family: var(--font-family-primary);
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+        margin-top: var(--spacing-lg);
+      }
+
+      ::slotted(button[type="submit"]:hover:not(:disabled)),
+      ::slotted(button[type="button"]:hover:not(:disabled)) {
+        background-color: var(--color-accent-hover);
+        transform: translateY(-1px);
+      }
+
+      ::slotted(button[type="submit"]:disabled),
+      ::slotted(button[type="button"]:disabled) {
+        background-color: var(--color-border);
+        cursor: not-allowed;
+        transform: none;
+      }
+
       button[type="submit"]:hover:not(:disabled),
       button[type="button"]:hover:not(:disabled) {
         background-color: var(--color-accent-hover);

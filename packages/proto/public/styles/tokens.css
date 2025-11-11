@@ -29,6 +29,8 @@
   --color-background-section: #FFFFFF;
   /* White sections */
   --color-background-card: #F8F9FA;
+  /* Secondary background (used for messages, highlights) */
+  --color-background-secondary: #F5F7FA;
   /* Light gray cards */
   --color-background-anchor-highlight: var(--color-accent);
 
@@ -128,6 +130,8 @@ body.dark-mode {
   --color-background-section: #1A1E23;
   /* Dark slate sections */
   --color-background-card: #212529;
+  /* Secondary background for dark mode (messages, subtle panels) */
+  --color-background-secondary: #0f1417;
   /* Dark gray cards */
   --color-background-anchor-highlight: var(--color-accent);
 
@@ -165,5 +169,7 @@ body.dark-mode {
 @media (prefers-color-scheme: dark) {
   body:not(.light-mode) {
     /* Apply dark mode by default if system prefers dark, unless explicitly set to light */
+    /* Ensure browser uses dark color rendering for form controls, scrollbars, etc. */
+    color-scheme: dark;
   }
 }
