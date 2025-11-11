@@ -5,171 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>National Parks</title>
     <link rel="stylesheet" href="/styles/page.css" />
-    <script type="module" src="/nav.ts"></script>
-    <script type="module" src="/card.ts"></script>
-    <script type="module" src="/section-header.ts"></script>
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+      import { NavElement } from "/nav.ts";
+      import { SectionHeader } from "/section-header.ts";
+      import { CardElement } from "/card.ts";
+      import ParksListing from "/parks-listing.ts";
+
+      define({
+        "mu-auth": Auth.Provider,
+        "nav-element": NavElement,
+        "section-header": SectionHeader,
+        "card-element": CardElement,
+        "parks-listing": ParksListing,
+      });
+    </script>
   </head>
   <body>
-    <nav-element>
-      <span slot="breadcrumb"> </span>
-      <a href="../index.html">Adventure Guide</a> → Parks</nav-element
-    >
+    <mu-auth provides="natty:auth" redirect="/login.html">
+      <nav-element>
+        <span slot="breadcrumb"> </span>
+        <a href="../index.html">Adventure Guide</a> → Parks</nav-element
+      >
 
-    <section-header
-      title="National Parks"
-      subtitle="Explore America's treasured national parks"
-    ></section-header>
-    <p style="margin-bottom: var(--spacing-xl); color: var(--color-text-light)">
-      Explore America's treasured national parks
-    </p>
+      <section-header
+        title="National Parks"
+        subtitle="Explore America's treasured national parks"
+      ></section-header>
+      <p
+        style="margin-bottom: var(--spacing-xl); color: var(--color-text-light)"
+      >
+        Explore America's treasured national parks
+      </p>
 
-    <section
-      style="
-        background-color: var(--color-background-page);
-        padding: var(--spacing-lg);
-        margin-bottom: var(--spacing-xl);
-        border-radius: var(--radius-lg);
-      "
-    >
-      <h2 style="margin-top: 0">Why Visit National Parks?</h2>
-      <div class="flex-section flex-row">
-        <div class="flex-item">
-          <h3>Natural Wonders</h3>
-          <p>
-            Experience breathtaking landscapes, diverse wildlife, and geological
-            formations that tell the story of our planet's history.
-          </p>
-        </div>
-        <div class="flex-item">
-          <h3>Conservation Legacy</h3>
-          <p>
-            These protected areas preserve America's natural heritage, providing
-            sanctuary for wildlife and opportunities for scientific research.
-          </p>
-        </div>
-        <div class="flex-item">
-          <h3>Adventure & Recreation</h3>
-          <p>
-            From hiking and camping to wildlife viewing and photography,
-            national parks offer endless opportunities for outdoor exploration.
-          </p>
-        </div>
-      </div>
-
-      <div style="margin-top: var(--spacing-xl)">
-        <h3>Park Categories</h3>
+      <section
+        style="
+          background-color: var(--color-background-page);
+          padding: var(--spacing-lg);
+          margin-bottom: var(--spacing-xl);
+          border-radius: var(--radius-lg);
+        "
+      >
+        <h2 style="margin-top: 0">Why Visit National Parks?</h2>
         <div class="flex-section flex-row">
-          <div class="flex-item flex-shrink">
-            <div
-              style="
-                background: var(--color-background-card);
-                padding: var(--spacing-md);
-                border-radius: var(--radius-md);
-                border: 1px solid var(--color-border);
-              "
-            >
-              <h4 style="margin-top: 0">
-                <svg class="icon icon-sm">
-                  <use href="/assets/icons/camping.svg#icon-mountain"></use>
-                </svg>
-                Mountains & Valleys
-              </h4>
-              <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
-                Yosemite, Yellowstone, Rocky Mountain
-              </p>
-            </div>
+          <div class="flex-item">
+            <h3>Natural Wonders</h3>
+            <p>
+              Experience breathtaking landscapes, diverse wildlife, and
+              geological formations that tell the story of our planet's history.
+            </p>
           </div>
-          <div class="flex-item flex-shrink">
-            <div
-              style="
-                background: var(--color-background-card);
-                padding: var(--spacing-md);
-                border-radius: var(--radius-md);
-                border: 1px solid var(--color-border);
-              "
-            >
-              <h4 style="margin-top: 0">
-                <svg class="icon icon-sm">
-                  <use href="/assets/icons/camping.svg#icon-tent"></use>
-                </svg>
-                Deserts & Canyons
-              </h4>
-              <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
-                Grand Canyon, Joshua Tree, Zion
-              </p>
-            </div>
+          <div class="flex-item">
+            <h3>Conservation Legacy</h3>
+            <p>
+              These protected areas preserve America's natural heritage,
+              providing sanctuary for wildlife and opportunities for scientific
+              research.
+            </p>
           </div>
-          <div class="flex-item flex-shrink">
-            <div
-              style="
-                background: var(--color-background-card);
-                padding: var(--spacing-md);
-                border-radius: var(--radius-md);
-                border: 1px solid var(--color-border);
-              "
-            >
-              <h4 style="margin-top: 0">
-                <svg class="icon icon-sm">
-                  <use href="/assets/icons/camping.svg#icon-lake"></use>
-                </svg>
-                Coasts & Islands
-              </h4>
-              <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
-                Acadia, Olympic, Channel Islands
-              </p>
-            </div>
+          <div class="flex-item">
+            <h3>Adventure & Recreation</h3>
+            <p>
+              From hiking and camping to wildlife viewing and photography,
+              national parks offer endless opportunities for outdoor
+              exploration.
+            </p>
           </div>
-          <div class="flex-item flex-shrink">
-            <div
-              style="
-                background: var(--color-background-card);
-                padding: var(--spacing-md);
-                border-radius: var(--radius-md);
-                border: 1px solid var(--color-border);
-              "
-            >
-              <h4 style="margin-top: 0">
-                <svg class="icon icon-sm">
-                  <use href="/assets/icons/camping.svg#icon-forest"></use>
-                </svg>
-                Forests & Wetlands
-              </h4>
-              <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
-                Everglades, Redwood, Great Smoky Mountains
-              </p>
+        </div>
+
+        <div style="margin-top: var(--spacing-xl)">
+          <h3>Park Categories</h3>
+          <div class="flex-section flex-row">
+            <div class="flex-item flex-shrink">
+              <div
+                style="
+                  background: var(--color-background-card);
+                  padding: var(--spacing-md);
+                  border-radius: var(--radius-md);
+                  border: 1px solid var(--color-border);
+                "
+              >
+                <h4 style="margin-top: 0">
+                  <svg class="icon icon-sm">
+                    <use href="/assets/icons/camping.svg#icon-mountain"></use>
+                  </svg>
+                  Mountains & Valleys
+                </h4>
+                <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
+                  Yosemite, Yellowstone, Rocky Mountain
+                </p>
+              </div>
+            </div>
+            <div class="flex-item flex-shrink">
+              <div
+                style="
+                  background: var(--color-background-card);
+                  padding: var(--spacing-md);
+                  border-radius: var(--radius-md);
+                  border: 1px solid var(--color-border);
+                "
+              >
+                <h4 style="margin-top: 0">
+                  <svg class="icon icon-sm">
+                    <use href="/assets/icons/camping.svg#icon-tent"></use>
+                  </svg>
+                  Deserts & Canyons
+                </h4>
+                <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
+                  Grand Canyon, Joshua Tree, Zion
+                </p>
+              </div>
+            </div>
+            <div class="flex-item flex-shrink">
+              <div
+                style="
+                  background: var(--color-background-card);
+                  padding: var(--spacing-md);
+                  border-radius: var(--radius-md);
+                  border: 1px solid var(--color-border);
+                "
+              >
+                <h4 style="margin-top: 0">
+                  <svg class="icon icon-sm">
+                    <use href="/assets/icons/camping.svg#icon-lake"></use>
+                  </svg>
+                  Coasts & Islands
+                </h4>
+                <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
+                  Acadia, Olympic, Channel Islands
+                </p>
+              </div>
+            </div>
+            <div class="flex-item flex-shrink">
+              <div
+                style="
+                  background: var(--color-background-card);
+                  padding: var(--spacing-md);
+                  border-radius: var(--radius-md);
+                  border: 1px solid var(--color-border);
+                "
+              >
+                <h4 style="margin-top: 0">
+                  <svg class="icon icon-sm">
+                    <use href="/assets/icons/camping.svg#icon-forest"></use>
+                  </svg>
+                  Forests & Wetlands
+                </h4>
+                <p style="margin-bottom: 0; font-size: var(--font-size-sm)">
+                  Everglades, Redwood, Great Smoky Mountains
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <card-grid
-      id="parks"
-      columns="repeat(auto-fit, minmax(350px, 1fr))"
-    ></card-grid>
-
-    <script>
-      (async function () {
-        const parks = await fetch("/api/parks")
-          .then((r) => r.json())
-          .catch(() => []);
-        const grid = document.getElementById("parks");
-        parks.forEach((p) => {
-          const el = document.createElement("card-element");
-          el.setAttribute("title", p.card?.title || p.name);
-          el.setAttribute(
-            "description",
-            p.card?.description || p.description || ""
-          );
-          el.setAttribute("href", `/parks/${p.parkid}/index.html`);
-          el.setAttribute("clickable", "");
-          if (p.card?.image) {
-            el.setAttribute("image", p.card.image);
-            el.setAttribute("image-alt", p.card.imageAlt || p.name);
-          }
-          grid.appendChild(el);
-        });
-      })();
-    </script>
+      <parks-listing></parks-listing>
+    </mu-auth>
   </body>
 </html>

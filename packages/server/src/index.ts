@@ -1,3 +1,4 @@
+import auth, { authenticateUser } from "./routes/auth";
 import express, { Request, Response } from "express";
 import path from "path";
 import { connect } from "./services/mongo";
@@ -21,16 +22,15 @@ app.get("/hello", (req: Request, res: Response) => {
   res.send("Hello, World");
 });
 
-app.use("/api/campsites", campsites);
-app.use("/api/parks", parks);
-app.use("/api/paths", paths);
-app.use("/api/poi", poi);
+app.use("/api/auth", auth);
+app.use("/api/campsites", authenticateUser, campsites);
+app.use("/api/parks", authenticateUser, parks);
+app.use("/api/paths", authenticateUser, paths);
+app.use("/api/poi", authenticateUser, poi);
 
-// API error/404 handlers for consistent JSON responses
 app.use(
   "/api",
   (err: unknown, req: Request, res: Response, _next: Function) => {
-    // If this middleware is hit with 4 args, it's an error handler
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
   }

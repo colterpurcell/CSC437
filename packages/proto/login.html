@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+      import { LoginFormElement } from "/src/auth/login-form";
+      import { NavElement } from "/nav.ts";
+
+      define({
+        "mu-auth": Auth.Provider,
+        "login-form": LoginFormElement,
+        "nav-element": NavElement,
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Add auth provider for login form to dispatch to, but no redirect protection -->
+    <mu-auth provides="natty:auth">
+      <nav-element>
+        <a href="index.html">Adventure Guide</a>
+      </nav-element>
+
+      <article id="main-content" style="display: block">
+        <h1>User Login</h1>
+
+        <section>
+          <h2>Login to Your Account</h2>
+          <form class="auth-form" id="login-form">
+            <login-form
+              id="login-form-element"
+              api="/api/auth/login"
+              redirect="/"
+            >
+              <label>
+                <span>Username:</span>
+                <input
+                  name="username"
+                  autocomplete="off"
+                  placeholder="Enter your username"
+                />
+              </label>
+              <label>
+                <span>Password:</span>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password"
+                />
+              </label>
+            </login-form>
+          </form>
+        </section>
+
+        <script>
+          // Check for 'next' parameter in URL and set redirect accordingly
+          const urlParams = new URLSearchParams(window.location.search);
+          const nextUrl = urlParams.get("next");
+          console.log("Login page - next URL:", nextUrl);
+
+          if (nextUrl) {
+            const loginFormElement =
+              document.getElementById("login-form-element");
+            console.log("Setting redirect to:", nextUrl);
+            loginFormElement.setAttribute("redirect", nextUrl);
+          }
+
+          // Also set up debugging for auth messages
+          document.addEventListener("auth:message", (event) => {
+            console.log("Auth message received on login page:", event);
+          });
+        </script>
+
+        <p style="grid-column: 1 / -1">
+          Or did you want to <a href="newuser.html">Sign up as a new user</a>?
+        </p>
+      </article>
+    </mu-auth>
+  </body>
+</html>

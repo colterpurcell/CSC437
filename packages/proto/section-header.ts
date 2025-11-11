@@ -1,6 +1,5 @@
 import { LitElement, html, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import reset from "./styles/reset.css.ts";
 
 interface SectionHeaderData {
   title: string;
@@ -51,7 +50,6 @@ class SectionHeader extends LitElement {
   }
 
   static styles = [
-    reset.styles,
     css`
       :host {
         display: block;

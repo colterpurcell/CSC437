@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
-import reset from "./styles/reset.css.ts";
+import { customElement, property, state } from "lit/decorators.js";
+import { Observer, Auth } from "@calpoly/mustang";
 
 @customElement("breadcrumb-link")
 class BreadcrumbLink extends LitElement {
@@ -17,7 +17,6 @@ class BreadcrumbLink extends LitElement {
   hideSeparator = false;
 
   static styles = [
-    reset.styles,
     css`
       :host {
         display: inline-flex;
@@ -77,8 +76,15 @@ class NavElement extends LitElement {
   @property({ attribute: "theme-label" })
   themeLabel = "Dark mode";
 
+  @state()
+  loggedIn = false;
+
+  @state()
+  userid?: string;
+
+  _authObserver: Observer<Auth.Model> = new Observer(this, "natty:auth");
+
   static styles = [
-    reset.styles,
     css`
       :host {
         display: block;
@@ -144,6 +150,59 @@ class NavElement extends LitElement {
         align-items: center;
         gap: var(--spacing-md, 0.75rem);
       }
+
+      .nav-actions span {
+        color: var(--color-text-inverted, #ffffff);
+        font-weight: var(--font-weight-semibold, 600);
+        white-space: nowrap;
+      }
+
+      .nav-actions button {
+        background-color: var(--color-accent, #ff6b35);
+        color: var(--color-text-inverted, #ffffff);
+        border: 2px solid var(--color-accent, #ff6b35);
+        padding: var(--spacing-xs, 0.25rem) var(--spacing-sm, 0.5rem);
+        border-radius: var(--radius-sm, 4px);
+        font-family: inherit;
+        font-size: var(--font-size-sm, 0.875rem);
+        font-weight: var(--font-weight-semibold, 600);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .nav-actions button:hover {
+        background-color: transparent;
+        color: var(--color-accent, #ff6b35);
+        transform: translateY(-1px);
+      }
+
+      .nav-actions button:focus {
+        outline: 2px solid var(--color-accent, #ff6b35);
+        outline-offset: 2px;
+      }
+
+      .nav-actions a {
+        color: var(--color-text-inverted, #ffffff);
+        text-decoration: none;
+        font-weight: var(--font-weight-semibold, 600);
+        padding: var(--spacing-xs, 0.25rem) var(--spacing-sm, 0.5rem);
+        border: 2px solid var(--color-accent, #ff6b35);
+        border-radius: var(--radius-sm, 4px);
+        background-color: transparent;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .nav-actions a:hover {
+        background-color: var(--color-accent, #ff6b35);
+        transform: translateY(-1px);
+      }
+
+      .nav-actions a:focus {
+        outline: 2px solid var(--color-accent, #ff6b35);
+        outline-offset: 2px;
+      }
     `,
   ];
 
@@ -153,6 +212,18 @@ class NavElement extends LitElement {
     const savedTheme = localStorage.getItem("theme");
     this.darkMode = savedTheme === "dark";
     document.body.classList.toggle("dark-mode", this.darkMode);
+
+    // Set up auth observer
+    this._authObserver.observe((auth) => {
+      const { user } = auth;
+      if (user && user.authenticated) {
+        this.loggedIn = true;
+        this.userid = user.username;
+      } else {
+        this.loggedIn = false;
+        this.userid = undefined;
+      }
+    });
   }
 
   updated() {
@@ -174,6 +245,12 @@ class NavElement extends LitElement {
         <div class="nav-actions">
           <slot name="actions"></slot>
 
+          ${this.loggedIn
+            ? html`
+                <span>Hello, ${this.userid || "traveler"}</span>
+                <button @click=${this._handleSignOut}>Sign Out</button>
+              `
+            : html` <a href="login.html">Sign In</a> `}
           ${!this.hideThemeToggle
             ? html`
                 <label for="dark-mode-toggle">
@@ -207,7 +284,17 @@ class NavElement extends LitElement {
     });
     this.dispatchEvent(customEvent);
   }
+
+  private _handleSignOut(event: Event) {
+    event.preventDefault();
+    const customEvent = new CustomEvent("auth:message", {
+      bubbles: true,
+      composed: true,
+      detail: ["auth/signout"],
+    });
+    this.dispatchEvent(customEvent);
+  }
 }
 
-export { BreadcrumbLink };
+export { BreadcrumbLink, NavElement };
 export default NavElement;

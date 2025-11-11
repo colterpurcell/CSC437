@@ -5,139 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Campsite</title>
     <link rel="stylesheet" href="/styles/page.css" />
-    <script type="module" src="/nav.ts"></script>
-    <script type="module" src="/section-header.ts"></script>
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+      import { NavElement } from "/nav.ts";
+      import { SectionHeader } from "/section-header.ts";
+      import CampsitePage from "/campsite-page.ts";
+
+      define({
+        "mu-auth": Auth.Provider,
+        "nav-element": NavElement,
+        "section-header": SectionHeader,
+        "campsite-page": CampsitePage,
+      });
+    </script>
   </head>
   <body>
-    <nav-element>
-      <span slot="breadcrumb"></span>
-      <a href="/index.html">Adventure Guide</a> →
-      <a href="/parks/index.html">Parks</a> →
-      <span id="campsite-name">Campsite</span>
-    </nav-element>
-
-    <section-header id="campsite-header"></section-header>
-    <div id="campsite-image" class="campsite-image" style="display: none;"></div>
-    <div id="details" class="panel"></div>
-
-    <script>
-      (async function () {
-        const parts = location.pathname.split("/").filter(Boolean);
-        const siteidWithExt = parts[1]; // /campsites/{siteid}.html
-        const siteid = siteidWithExt?.replace(/\.html$/, "");
-        if (!siteid) return;
-
-        const campsite = await fetch(`/api/campsites/${siteid}`)
-          .then((r) => r.json())
-          .catch(() => null);
-        if (!campsite) return;
-
-        document.getElementById("campsite-name").textContent = campsite.name;
-        const header = document.getElementById("campsite-header");
-        header.setAttribute("title", campsite.name);
-        header.setAttribute(
-          "subtitle",
-          `${campsite.location} • Capacity: ${campsite.capacity}`
-        );
-
-        // Add campsite image if available
-        if (campsite.card?.image) {
-          const imageDiv = document.getElementById("campsite-image");
-          imageDiv.style.display = "block";
-          imageDiv.innerHTML = `
-            <img src="${campsite.card.image}" alt="${campsite.card.imageAlt || campsite.name}" />
-          `;
-        }
-
-        const details = document.getElementById("details");
-        const paths = (campsite.connectedPaths || [])
-          .map(
-            (p) => `<a class="chip" href="/paths/${p.pathId}.html">
-          <svg class="icon icon-sm"><use href="/assets/icons/camping.svg#${
-            p.pathType === "road" ? "icon-road" : "icon-hiking"
-          }"></use></svg>
-          ${p.pathName}
-        </a>`
-          )
-          .join("");
-        const poi = (campsite.nearbyPoi || [])
-          .map(
-            (p) => `<a class="chip" href="/poi/${p.poiId}.html">
-          <svg class="icon icon-sm"><use href="/assets/icons/camping.svg#icon-pin"></use></svg>
-          ${p.poiName}
-        </a>`
-          )
-          .join("");
-
-        details.innerHTML = `
-          <p class="lead">${campsite.description || ""}</p>
-          <div class="meta-row">
-            <span class="chip"><svg class="icon icon-sm"><use href="/assets/icons/camping.svg#icon-users"></use></svg> Capacity: ${
-              campsite.capacity
-            }</span>
-            <span class="chip"><svg class="icon icon-sm"><use href="/assets/icons/camping.svg#icon-pin"></use></svg> ${
-              campsite.location
-            }</span>
-          </div>
-          <h3>Connected Paths</h3>
-          <div class="chip-row">${
-            paths || '<span class="muted">No connected paths listed</span>'
-          }</div>
-          <h3 style="margin-top: var(--spacing-md)">Nearby Points of Interest</h3>
-          <div class="chip-row">${
-            poi || '<span class="muted">No POI listed</span>'
-          }</div>
-        `;
-      })();
-    </script>
-    <style>
-      .panel {
-        margin-top: var(--spacing-lg);
-        padding: var(--spacing-lg);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-md);
-        background: var(--color-background-card);
-      }
-      .lead {
-        color: var(--color-text-light);
-        margin-bottom: var(--spacing-md);
-      }
-      .meta-row,
-      .chip-row {
-        display: flex;
-        gap: var(--spacing-sm);
-        flex-wrap: wrap;
-      }
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--spacing-xs);
-        padding: 4px 8px;
-        border: 1px solid var(--color-border);
-        border-radius: 9999px;
-        font-size: 0.875rem;
-        color: var(--color-text);
-        background: var(--color-background);
-      }
-      .icon-sm {
-        width: 16px;
-        height: 16px;
-        fill: currentColor;
-      }
-      .muted {
-        color: var(--color-text-light);
-      }
-      .campsite-image {
-        margin-bottom: var(--spacing-lg);
-        border-radius: var(--radius-md);
-        overflow: hidden;
-      }
-      .campsite-image img {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: var(--radius-md);
-      }
-    </style>
+    <mu-auth provides="natty:auth" redirect="/login.html">
+      <campsite-page></campsite-page>
+    </mu-auth>
   </body>
 </html>

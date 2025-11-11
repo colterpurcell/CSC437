@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+      import { LoginFormElement } from "/src/auth/login-form";
+      import { NavElement } from "/nav.ts";
+
+      define({
+        "mu-auth": Auth.Provider,
+        "login-form": LoginFormElement,
+        "nav-element": NavElement,
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Add auth provider for registration form to dispatch to, but no redirect protection -->
+    <mu-auth provides="natty:auth">
+      <nav-element>
+        <a href="index.html">Adventure Guide</a>
+      </nav-element>
+
+      <article id="main-content" style="display: block">
+        <h1>User Registration</h1>
+
+        <section>
+          <h2>Create Your Account</h2>
+          <form class="auth-form" id="register-form">
+            <login-form
+              id="register-form-element"
+              api="/api/auth/register"
+              redirect="/"
+            >
+              <label>
+                <span>Username:</span>
+                <input
+                  name="username"
+                  autocomplete="off"
+                  placeholder="Choose a username"
+                />
+              </label>
+              <label>
+                <span>Password:</span>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Create a password"
+                />
+              </label>
+              <label>
+                <span>Confirm Password:</span>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  placeholder="Confirm your password"
+                />
+              </label>
+            </login-form>
+          </form>
+        </section>
+
+        <script>
+          // Check for 'next' parameter in URL and set redirect accordingly
+          const urlParams = new URLSearchParams(window.location.search);
+          const nextUrl = urlParams.get("next");
+          if (nextUrl) {
+            const registerFormElement = document.getElementById(
+              "register-form-element"
+            );
+            registerFormElement.setAttribute("redirect", nextUrl);
+          }
+        </script>
+
+        <p style="grid-column: 1 / -1">
+          Already have an account? <a href="login.html">Log in here</a>.
+        </p>
+      </article>
+    </mu-auth>
+  </body>
+</html>

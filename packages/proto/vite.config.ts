@@ -23,12 +23,12 @@ const input = Object.fromEntries(
 // Custom plugin to handle dynamic routing
 const dynamicRoutingPlugin = () => {
   return {
-    name: 'dynamic-routing',
+    name: "dynamic-routing",
     configureServer(server: any) {
-      server.middlewares.use('/parks', (req: any, _res: any, next: any) => {
+      server.middlewares.use("/parks", (req: any, _res: any, next: any) => {
         // Handle /parks/:parkid/index.html -> /parks/park/index.html
         if (req.url?.match(/^\/parks\/[^\/]+\/index\.html$/)) {
-          req.url = '/parks/park/index.html';
+          req.url = "/parks/park/index.html";
         }
         next();
       });
@@ -36,27 +36,27 @@ const dynamicRoutingPlugin = () => {
       server.middlewares.use((req: any, _res: any, next: any) => {
         // Handle /paths/:pathid.html -> /paths/path/index.html
         if (req.url?.match(/^\/paths\/[^\/]+\.html$/)) {
-          req.url = '/paths/path/index.html';
+          req.url = "/paths/path/index.html";
         }
         next();
       });
 
-      server.middlewares.use('/campsites', (req: any, _res: any, next: any) => {
+      server.middlewares.use("/campsites", (req: any, _res: any, next: any) => {
         // Handle /campsites/:siteid.html -> /campsites/site/index.html
         if (req.url?.match(/^\/campsites\/[^\/]+\.html$/)) {
-          req.url = '/campsites/site/index.html';
+          req.url = "/campsites/site/index.html";
         }
         next();
       });
 
-      server.middlewares.use('/poi', (req: any, _res: any, next: any) => {
+      server.middlewares.use("/poi", (req: any, _res: any, next: any) => {
         // Handle /poi/:poiid.html -> /poi/poi/index.html
         if (req.url?.match(/^\/poi\/[^\/]+\.html$/)) {
-          req.url = '/poi/poi/index.html';
+          req.url = "/poi/poi/index.html";
         }
         next();
       });
-    }
+    },
   };
 };
 
@@ -72,8 +72,8 @@ export default defineConfig({
     // Handle dynamic routing in development
     middlewareMode: false,
     fs: {
-      strict: false
-    }
+      strict: false,
+    },
   },
   build: {
     rollupOptions: {
@@ -81,5 +81,5 @@ export default defineConfig({
     },
   },
   // Configure as multi-page application
-  appType: 'mpa',
+  appType: "mpa",
 });

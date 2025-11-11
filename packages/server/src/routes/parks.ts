@@ -5,14 +5,21 @@ const router = express.Router();
 
 // GET /api/parks?park=parkid
 router.get("/", (req: Request, res: Response) => {
+  console.log("GET /api/parks called");
   const { park } = req.query as { park?: string };
   const listPromise = park
     ? Parks.index().then((list) => list.filter((p) => p.parkid === park))
     : Parks.index();
 
   listPromise
-    .then((list) => res.json(list))
-    .catch((err) => res.status(500).json({ error: String(err) }));
+    .then((list) => {
+      console.log(`Returning ${list.length} parks`);
+      res.json(list);
+    })
+    .catch((err) => {
+      console.log("Error fetching parks:", err);
+      res.status(500).json({ error: String(err) });
+    });
 });
 
 // GET /api/parks/:parkid

@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trips - Adventure Guide</title>
     <link rel="stylesheet" href="/styles/page.css" />
-    <script type="module" src="/nav.ts"></script>
-    <script type="module" src="/card.ts"></script>
-    <script type="module" src="/section-header.ts"></script>
+    <script type="module">
+      import { define } from "@calpoly/mustang";
+      import { NavElement } from "/nav.ts";
+      import { CardElement } from "/card.ts";
+      import { SectionHeader } from "/section-header.ts";
+
+      define({
+        "nav-element": NavElement,
+        "card-element": CardElement,
+        "section-header": SectionHeader,
+      });
+    </script>
   </head>
   <body>
     <nav-element>

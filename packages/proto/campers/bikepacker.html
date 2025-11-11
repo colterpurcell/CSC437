@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bikepacker</title>
     <link rel="stylesheet" href="/styles/page.css" />
-    <script type="module" src="/nav.ts"></script>
+    <script type="module">
+      import { define } from "@calpoly/mustang";
+      import { NavElement } from "/nav.ts";
+
+      define({
+        "nav-element": NavElement,
+      });
+    </script>
   </head>
   <body>
     <nav-element>
