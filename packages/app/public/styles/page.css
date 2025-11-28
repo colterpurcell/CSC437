@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('./reset.css');
-@import url('./tokens.css');
+@import url('/styles/reset.css');
+@import url('/styles/tokens.css');
 
 html {
   scroll-behavior: smooth;
@@ -160,7 +160,8 @@ a:visited {
 }
 
 /* Card-style links for camping types */
-section p a {
+section p a,
+section article h3 a {
   display: block;
   background-color: var(--color-background-section);
   padding: var(--spacing-lg) var(--spacing-xl);
@@ -168,9 +169,15 @@ section p a {
   border: 1px solid var(--color-border);
   margin: var(--spacing-lg) 0;
   transition: all 0.2s ease;
+  text-decoration: none;
+  color: var(--color-link);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
-section p a:hover {
+section p a:hover,
+section article h3 a:hover {
   border-color: var(--color-accent);
   background-color: var(--color-background-card);
   text-decoration: none;
@@ -178,7 +185,8 @@ section p a:hover {
   box-shadow: var(--shadow-md);
 }
 
-section p a strong {
+section p a strong,
+section article h3 a strong {
   color: var(--color-primary);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
@@ -186,7 +194,8 @@ section p a strong {
   margin-bottom: var(--spacing-sm);
 }
 
-section p a em {
+section p a em,
+section article h3 a em {
   color: var(--color-text-light);
   font-style: italic;
   font-size: var(--font-size-sm);
@@ -215,6 +224,7 @@ section:target {
   fill: var(--color-icon);
   vertical-align: middle;
   display: inline-block;
+  flex-shrink: 0;
 }
 
 .icon-sm {
@@ -224,17 +234,17 @@ section:target {
 
 .icon-md {
   width: 24px;
-  height: 24px;
+  height: 16px;
 }
 
 .icon-lg {
   width: 32px;
-  height: 32px;
+  height: 24px;
 }
 
 .icon-xl {
   width: 64px;
-  height: 64px;
+  height: 32px;
 }
 
 /* Responsive adjustments */

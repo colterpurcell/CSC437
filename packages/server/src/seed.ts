@@ -3,6 +3,7 @@ import { ParkModel } from "./models/park-model";
 import { PathModel } from "./models/path-model";
 import { POIModel } from "./models/poi-model";
 import { CampsiteModel } from "./models/campsite-model";
+import { ItineraryModel } from "./models/itinerary-model";
 
 async function seed() {
   connect("natty");
@@ -15,6 +16,7 @@ async function seed() {
     PathModel.deleteMany({}),
     POIModel.deleteMany({}),
     CampsiteModel.deleteMany({}),
+    ItineraryModel.deleteMany({}),
   ]);
 
   const parks = [
@@ -102,7 +104,8 @@ async function seed() {
       parkName: "Yosemite National Park",
       name: "Mist Trail",
       type: "trail" as const,
-      description: "Iconic trail to Vernal Fall with stunning waterfalls and granite cliffs.",
+      description:
+        "Iconic trail to Vernal Fall with stunning waterfalls and granite cliffs.",
       image:
         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop",
       imageAlt:
@@ -266,7 +269,262 @@ async function seed() {
   await POIModel.insertMany(poi);
   await CampsiteModel.insertMany(campsites);
 
+  // Seed itineraries for sample trips
+  const itineraries = [
+    // Yosemite Fall Trip Itinerary
+    {
+      itineraryid: "yose-fall-day1",
+      tripid: "yose-fall",
+      tripName: "Yosemite Fall Adventure",
+      day: 1,
+      date: "2024-10-15",
+      activities: [
+        {
+          time: "8:00 AM",
+          activity: "Arrival at Yosemite Valley",
+          location: "Yosemite Valley",
+          description: "Check in at visitor center and get permits",
+        },
+        {
+          time: "10:00 AM",
+          activity: "Valley Loop Drive",
+          location: "Valley Loop Road",
+          description:
+            "Scenic drive around the valley with stops at viewpoints",
+          pathId: "valley-loop",
+        },
+        {
+          time: "12:00 PM",
+          activity: "Lunch",
+          location: "Yosemite Village",
+          description: "Pack lunch at village area",
+        },
+        {
+          time: "2:00 PM",
+          activity: "Set up camp",
+          location: "Upper Pines Site 015",
+          description: "Set up tents and organize gear",
+          campsiteId: "upper-pines-015",
+        },
+        {
+          time: "4:00 PM",
+          activity: "Explore campground area",
+          location: "Upper Pines Campground",
+          description: "Walk around and meet neighbors",
+        },
+      ],
+      campsiteId: "upper-pines-015",
+      campsiteName: "Upper Pines Site 015",
+      notes: "Remember to bring bear canisters!",
+      card: {
+        title: "Day 1: Arrival",
+        description: "Arrive and set up camp",
+        href: "/app/trips/yose-fall/itinerary/day1",
+      },
+    },
+    {
+      itineraryid: "yose-fall-day2",
+      tripid: "yose-fall",
+      tripName: "Yosemite Fall Adventure",
+      day: 2,
+      date: "2024-10-16",
+      activities: [
+        {
+          time: "6:00 AM",
+          activity: "Breakfast at camp",
+          location: "Upper Pines Site 015",
+          description: "Cook breakfast and pack lunch",
+          campsiteId: "upper-pines-015",
+        },
+        {
+          time: "7:00 AM",
+          activity: "Mist Trail Hike",
+          location: "Mist Trail",
+          description: "Hike to Vernal Fall - bring rain gear!",
+          pathId: "mist-trail",
+        },
+        {
+          time: "12:00 PM",
+          activity: "Lunch at trail",
+          location: "Vernal Fall viewpoint",
+          description: "Scenic lunch break",
+        },
+        {
+          time: "3:00 PM",
+          activity: "Return to camp",
+          location: "Upper Pines Site 015",
+          description: "Rest and relax",
+          campsiteId: "upper-pines-015",
+        },
+        {
+          time: "6:00 PM",
+          activity: "Dinner and campfire",
+          location: "Upper Pines Site 015",
+          description: "Evening campfire and stargazing",
+          campsiteId: "upper-pines-015",
+        },
+      ],
+      campsiteId: "upper-pines-015",
+      campsiteName: "Upper Pines Site 015",
+      notes: "Bring waterproof jacket for the mist!",
+      card: {
+        title: "Day 2: Mist Trail",
+        description: "Hike to Vernal Fall",
+        href: "/app/trips/yose-fall/itinerary/day2",
+      },
+    },
+    {
+      itineraryid: "yose-fall-day3",
+      tripid: "yose-fall",
+      tripName: "Yosemite Fall Adventure",
+      day: 3,
+      date: "2024-10-17",
+      activities: [
+        {
+          time: "6:00 AM",
+          activity: "Pack up camp",
+          location: "Upper Pines Site 015",
+          description: "Break down camp and pack everything",
+          campsiteId: "upper-pines-015",
+        },
+        {
+          time: "8:00 AM",
+          activity: "Glacier Point Drive",
+          location: "Glacier Point Road",
+          description: "Drive to Glacier Point for panoramic views",
+          pathId: "glacier-point-road",
+        },
+        {
+          time: "10:00 AM",
+          activity: "Glacier Point viewing",
+          location: "Glacier Point",
+          description: "Take in the incredible valley views",
+        },
+        {
+          time: "12:00 PM",
+          activity: "Departure",
+          location: "Yosemite Valley",
+          description: "Head home with amazing memories",
+        },
+      ],
+      campsiteId: "upper-pines-015",
+      campsiteName: "Upper Pines Site 015",
+      notes: "Check weather for Glacier Point road conditions",
+      card: {
+        title: "Day 3: Departure",
+        description: "Glacier Point and goodbye",
+        href: "/app/trips/yose-fall/itinerary/day3",
+      },
+    },
+    // Yellowstone Summer Trip Itinerary
+    {
+      itineraryid: "yell-summer-day1",
+      tripid: "yell-summer",
+      tripName: "Yellowstone Summer Explorer",
+      day: 1,
+      date: "2024-07-10",
+      activities: [
+        {
+          time: "9:00 AM",
+          activity: "Arrive at Yellowstone",
+          location: "West Entrance",
+          description: "Enter park and head to campsite",
+        },
+        {
+          time: "11:00 AM",
+          activity: "Check in and set up",
+          location: "Bridge Bay Site 001",
+          description: "Set up camp by the lake",
+          campsiteId: "bridge-bay-001",
+        },
+        {
+          time: "1:00 PM",
+          activity: "Lunch at camp",
+          location: "Bridge Bay Site 001",
+          description: "First meal at camp",
+          campsiteId: "bridge-bay-001",
+        },
+        {
+          time: "3:00 PM",
+          activity: "Visit Old Faithful",
+          location: "Old Faithful",
+          description: "Watch the famous geyser erupt",
+          poiId: "old-faithful",
+        },
+        {
+          time: "6:00 PM",
+          activity: "Dinner and evening relaxation",
+          location: "Bridge Bay Site 001",
+          description: "Cook dinner and enjoy the lake views",
+          campsiteId: "bridge-bay-001",
+        },
+      ],
+      campsiteId: "bridge-bay-001",
+      campsiteName: "Bridge Bay Site 001",
+      notes: "Old Faithful erupts approximately every 90 minutes",
+      card: {
+        title: "Day 1: Arrival",
+        description: "First day in Yellowstone",
+        href: "/app/trips/yell-summer/itinerary/day1",
+      },
+    },
+    {
+      itineraryid: "yell-summer-day2",
+      tripid: "yell-summer",
+      tripName: "Yellowstone Summer Explorer",
+      day: 2,
+      date: "2024-07-11",
+      activities: [
+        {
+          time: "7:00 AM",
+          activity: "Early breakfast",
+          location: "Bridge Bay Site 001",
+          description: "Fuel up for the day",
+          campsiteId: "bridge-bay-001",
+        },
+        {
+          time: "8:00 AM",
+          activity: "Grand Loop Road tour",
+          location: "Grand Loop Road",
+          description: "Drive the full loop with stops at major attractions",
+          pathId: "grand-loop",
+        },
+        {
+          time: "12:00 PM",
+          activity: "Picnic lunch",
+          location: "Yellowstone Lake",
+          description: "Lakeside lunch break",
+        },
+        {
+          time: "2:00 PM",
+          activity: "Continue loop tour",
+          location: "Grand Loop Road",
+          description: "Visit geysers, hot springs, and wildlife viewing",
+          pathId: "grand-loop",
+        },
+        {
+          time: "6:00 PM",
+          activity: "Return to camp",
+          location: "Bridge Bay Site 001",
+          description: "Dinner and campfire stories",
+          campsiteId: "bridge-bay-001",
+        },
+      ],
+      campsiteId: "bridge-bay-001",
+      campsiteName: "Bridge Bay Site 001",
+      notes: "Bring binoculars for wildlife spotting!",
+      card: {
+        title: "Day 2: Grand Loop",
+        description: "Explore the park",
+        href: "/app/trips/yell-summer/itinerary/day2",
+      },
+    },
+  ];
+
+  await ItineraryModel.insertMany(itineraries);
+
   console.log("Seeded parks:", parkDocs.length);
+  console.log("Seeded itineraries:", itineraries.length);
   process.exit(0);
 }
 

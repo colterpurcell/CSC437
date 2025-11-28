@@ -1,0 +1,25 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Colter Purcell",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx vite",
+    "build": "npx tsc && npx vite build",
+    "start": "http-server dist -p 3000"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "lit": "^3.3.1"
+  },
+  "devDependencies": {
+    "@calpoly/mustang": "^1.0.15",
+    "@types/node": "^24.9.1",
+    "glob": "^11.0.3",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1"
+  }
+}

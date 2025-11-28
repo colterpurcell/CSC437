@@ -1,11 +1,13 @@
 import auth, { authenticateUser } from "./routes/auth";
 import express, { Request, Response } from "express";
 import path from "path";
+import fs from "node:fs/promises";
 import { connect } from "./services/mongo";
 import campsites from "./routes/campsites";
 import parks from "./routes/parks";
 import paths from "./routes/paths";
 import poi from "./routes/poi";
+import itineraries from "./routes/itineraries";
 
 connect("natty");
 
@@ -27,6 +29,7 @@ app.use("/api/campsites", authenticateUser, campsites);
 app.use("/api/parks", authenticateUser, parks);
 app.use("/api/paths", authenticateUser, paths);
 app.use("/api/poi", authenticateUser, poi);
+app.use("/api/itineraries", authenticateUser, itineraries);
 
 app.use(
   "/api",
@@ -42,24 +45,13 @@ app.use("/api", (req: Request, res: Response) => {
     .json({ error: "Not Found", path: req.originalUrl, method: req.method });
 });
 
-// Generic page rewrites for static frontend
-const staticRoot = path.resolve(staticDir);
-
-app.get("/parks/:parkid/index.html", (req: Request, res: Response) => {
-  res.sendFile(path.join(staticRoot, "parks/park/index.html"));
+// SPA Routes: /app/...
+app.use("/app", (req: Request, res: Response) => {
+  const indexHtml = path.resolve(staticDir, "index.html");
+  fs.readFile(indexHtml, { encoding: "utf8" }).then((html) => res.send(html));
 });
 
-app.get("/campsites/:siteid.html", (req: Request, res: Response) => {
-  res.sendFile(path.join(staticRoot, "campsites/site/index.html"));
-});
-
-app.get("/paths/:pathid.html", (req: Request, res: Response) => {
-  res.sendFile(path.join(staticRoot, "paths/path/index.html"));
-});
-
-app.get("/poi/:poiid.html", (req: Request, res: Response) => {
-  res.sendFile(path.join(staticRoot, "poi/poi/index.html"));
-});
+// Removed legacy static rewrites for multi-page HTML; SPA handles routes under /app
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
