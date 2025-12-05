@@ -1,7 +1,5 @@
 import express, { Request, Response } from "express";
-import ItinerariesSvc, {
-  Itineraries as Itineraries,
-} from "../services/itinerary-svc";
+import ItinerariesSvc, { Itineraries } from "../services/itinerary-svc";
 import { authenticateUser } from "./auth";
 
 const router = express.Router();
