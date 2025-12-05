@@ -17,9 +17,11 @@
   <body>
     <mu-history provides="natty:history">
       <mu-auth provides="natty:auth" redirect="/app/login">
-        <article class="page">
-          <mu-switch></mu-switch>
-        </article>
+        <mu-store provides="natty:model">
+          <article class="page">
+            <mu-switch></mu-switch>
+          </article>
+        </mu-store>
       </mu-auth>
     </mu-history>
   </body>

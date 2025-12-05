@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
-import { LoginFormElement } from "../auth/login-form.ts";
+import "../auth/login-form.ts";
 import { themeTokens } from "../styles/theme-tokens.css.ts";
 import { pageStyles } from "../styles/page-styles.css.ts";
 
@@ -55,5 +55,3 @@ class RegisterViewElement extends LitElement {
 }
 
 export default RegisterViewElement;
-
-void LoginFormElement;

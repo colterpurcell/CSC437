@@ -2,75 +2,74 @@ import { css } from "lit";
 
 export const pageStyles = [
   css`
-    @import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Knewave&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
   `,
   // Include all the CSS from the original files
   css`
     :root {
       /* Color Palette - High Contrast Nature Theme */
-      --color-primary: #0D4F3C;
+      --color-primary: #0d4f3c;
       /* Deep forest green */
-      --color-primary-light: #1B6B47;
+      --color-primary-light: #1b6b47;
       /* Medium forest green */
-      --color-primary-dark: #062D23;
+      --color-primary-dark: #062d23;
       /* Very dark forest green */
-      --color-accent: #FF6B35;
+      --color-accent: #ff6b35;
       /* Bright orange (trail marker) */
-      --color-accent-hover: #E55A2B;
+      --color-accent-hover: #e55a2b;
       /* Darker orange on hover */
 
       /* Text Colors */
-      --color-text: #1A1A1A;
+      --color-text: #1a1a1a;
       /* Near black for maximum contrast */
-      --color-text-light: #2D2D2D;
+      --color-text-light: #2d2d2d;
       /* Dark gray for secondary text */
-      --color-text-inverted: #FFFFFF;
+      --color-text-inverted: #ffffff;
       /* Pure white for dark backgrounds */
       --color-text-muted: #666666;
       /* Medium gray for muted text */
 
       /* Background Colors */
-      --color-background-page: #FFFFFF;
+      --color-background-page: #ffffff;
       /* Pure white page background */
       --color-background-header: var(--color-primary);
       /* Dark green header */
-      --color-background-section: #FFFFFF;
+      --color-background-section: #ffffff;
       /* White sections */
-      --color-background-card: #F8F9FA;
+      --color-background-card: #f8f9fa;
       /* Secondary background (used for messages, highlights) */
-      --color-background-secondary: #F5F7FA;
+      --color-background-secondary: #f5f7fa;
       /* Light gray cards */
       --color-background-anchor-highlight: var(--color-accent);
 
       /* Border Colors */
-      --color-border: #C0C0C0;
+      --color-border: #c0c0c0;
       /* Medium gray borders */
       --color-border-accent: var(--color-accent);
       /* Orange accent borders */
-      --color-border-light: #E8E8E8;
+      --color-border-light: #e8e8e8;
       /* Light gray borders */
 
       /* Link Colors */
-      --color-link: #8B4513;
+      --color-link: #8b4513;
       /* Brown links */
-      --color-link-hover: #FF6B35;
+      --color-link-hover: #ff6b35;
       /* Orange on hover */
       --color-link-visited: var(--color-primary-light);
       /* Lighter green for visited links */
 
       /* Status Colors */
-      --color-success: #28A745;
+      --color-success: #28a745;
       /* Standard success green */
-      --color-warning: #FFC107;
+      --color-warning: #ffc107;
       /* Standard warning yellow */
-      --color-error: #DC3545;
+      --color-error: #dc3545;
       /* Standard error red */
 
       /* Icon Color */
       --color-icon: var(--color-text);
       --color-icon-muted: var(--color-text-muted);
-
 
       /* Spacing */
       --spacing-xs: 4px;
@@ -81,8 +80,9 @@ export const pageStyles = [
       --spacing-xxl: 48px;
 
       /* Typography */
-      --font-family-display: 'Knewave', cursive;
-      --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-family-display: "Knewave", cursive;
+      --font-family-primary: "Inter", -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, sans-serif;
       --font-size-sm: 0.875rem;
       --font-size-base: 1rem;
       --font-size-lg: 1.125rem;
@@ -105,39 +105,39 @@ export const pageStyles = [
       /* Shadows */
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
       --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
-      --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.20);
+      --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
   `,
   css`
     body.dark-mode {
       /* Dark Mode Color Palette - Nature Theme */
-      --color-primary: #2E8B57;
+      --color-primary: #2e8b57;
       /* Medium sea green for better contrast */
-      --color-primary-light: #3CB371;
+      --color-primary-light: #3cb371;
       /* Lighter medium sea green */
-      --color-primary-dark: #1E5A3A;
+      --color-primary-dark: #1e5a3a;
       /* Darker green for depth */
-      --color-accent: #FF6B35;
+      --color-accent: #ff6b35;
       /* Bright orange (trail marker) */
-      --color-accent-hover: #E55A2B;
+      --color-accent-hover: #e55a2b;
       /* Darker orange on hover */
 
       /* Text Colors */
-      --color-text: #F8F9FA;
+      --color-text: #f8f9fa;
       /* Light gray for maximum contrast on dark backgrounds */
-      --color-text-light: #E9ECEF;
+      --color-text-light: #e9ecef;
       /* Muted gray for secondary text */
       --color-text-inverted: #000000;
       /* Black for inverted text on light elements */
-      --color-text-muted: #6C757D;
+      --color-text-muted: #6c757d;
       /* Muted gray */
 
       /* Background Colors */
-      --color-background-page: #0F1419;
+      --color-background-page: #0f1419;
       /* Dark charcoal page background */
       --color-background-header: var(--color-primary);
       /* Deep green header */
-      --color-background-section: #1A1E23;
+      --color-background-section: #1a1e23;
       /* Dark slate sections */
       --color-background-card: #212529;
       /* Secondary background for dark mode (messages, subtle panels) */
@@ -150,7 +150,7 @@ export const pageStyles = [
       /* Medium dark gray borders */
       --color-border-accent: var(--color-accent);
       /* Orange accent borders */
-      --color-border-light: #343A40;
+      --color-border-light: #343a40;
       /* Lighter dark borders */
 
       /* Link Colors */
@@ -162,11 +162,11 @@ export const pageStyles = [
       /* Lighter green for visited links */
 
       /* Status Colors */
-      --color-success: #28A745;
+      --color-success: #28a745;
       /* Standard success green */
-      --color-warning: #FFC107;
+      --color-warning: #ffc107;
       /* Standard warning yellow */
-      --color-error: #DC3545;
+      --color-error: #dc3545;
       /* Standard error red */
 
       /* Icon Color */
@@ -198,7 +198,6 @@ export const pageStyles = [
       font-weight: var(--font-weight-normal);
       line-height: var(--line-height-base);
       margin: 0;
-      padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
     }
 
     /* Navigation styling */
@@ -238,16 +237,16 @@ export const pageStyles = [
     /* Article and section styling */
     article {
       background-color: var(--color-background-section);
-      padding: var(--spacing-lg);
-      border-radius: var(--radius-lg);
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
       box-shadow: var(--shadow-md);
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
       gap: var(--spacing-lg);
+      padding: 0 var(--spacing-lg);
     }
 
-    article>h1,
-    article>p {
+    article > h1,
+    article > p {
       grid-column: 1 / -1;
     }
 

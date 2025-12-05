@@ -1,6 +1,6 @@
 import { css } from "lit";
 
-const styles = css`
+export const resetStyles = css`
   * {
     margin: 0;
     padding: 0;
@@ -64,5 +64,3 @@ const styles = css`
     display: none !important;
   }
 `;
-
-export default { styles };

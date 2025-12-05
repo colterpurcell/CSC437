@@ -1,6 +1,5 @@
-// in proto/src/auth/login-form.ts
 import { html, css, LitElement } from "lit";
-import { property, state } from "lit/decorators.js";
+import { property, state, customElement } from "lit/decorators.js";
 
 interface LoginFormData {
   username?: string;
@@ -8,6 +7,7 @@ interface LoginFormData {
   confirmPassword?: string;
 }
 
+@customElement("login-form")
 export class LoginFormElement extends LitElement {
   @state()
   formData: LoginFormData = {};

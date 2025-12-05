@@ -1,4 +1,5 @@
-import { Auth, define, History, Switch } from "@calpoly/mustang";
+import { Auth, define, History, Switch, Form, Store } from "@calpoly/mustang";
+import update from "./update";
 import { html } from "lit";
 import { NavElement } from "./components/nav.ts";
 import { CardElement, CardGrid } from "./components/card.ts";
@@ -9,10 +10,10 @@ import PoiListingElement from "./components/poi-listing.ts";
 import "./views/home-view.ts";
 import "./views/parks-view.ts";
 import "./views/paths-view.ts";
-import "./views/campers-view.ts";
 import "./views/trips-view.ts";
 import "./views/poi-view.ts";
 import "./views/itinerary-view.ts";
+import "./views/itinerary-create-view.ts";
 import "./pages/park-page.ts";
 import "./pages/campsite-page.ts";
 import "./pages/path-page.ts";
@@ -20,8 +21,9 @@ import "./pages/poi-page.ts";
 import "./views/trip-view.ts";
 import "./views/login-view.ts";
 import "./views/register-view.ts";
-import "./views/camper-type-view.ts";
-import { LoginFormElement } from "./auth/login-form.ts";
+import { Msg } from "./messages.ts";
+import { init, Model } from "./model.ts";
+// campers view removed (placeholder content) - routes/imports cleaned up
 
 const routes = [
   {
@@ -43,21 +45,16 @@ const routes = [
       html`<path-page path-id=${params.pathid}></path-page>`,
   },
   {
-    path: "/app/campers",
-    view: () => html`<campers-view></campers-view>`,
-  },
-  {
-    path: "/app/campers/:type",
-    view: (params: Switch.Params) =>
-      html`<camper-type-view type=${params.type}></camper-type-view>`,
-  },
-  {
     path: "/app/trips",
     view: () => html`<trips-view></trips-view>`,
   },
   {
     path: "/app/trips/itinerary",
     view: () => html`<itinerary-view></itinerary-view>`,
+  },
+  {
+    path: "/app/trips/new",
+    view: () => html`<itinerary-create-view></itinerary-create-view>`,
   },
   {
     path: "/app/trips/:slug",
@@ -116,5 +113,10 @@ define({
   "parks-listing": ParksListingElement,
   "paths-listing": PathsListingElement,
   "poi-listing": PoiListingElement,
-  "login-form": LoginFormElement,
+  "mu-form": Form.Element,
+  "mu-store": class AppStore extends Store.Provider<Model, Msg> {
+    constructor() {
+      super(update, init, "natty:auth");
+    }
+  },
 });

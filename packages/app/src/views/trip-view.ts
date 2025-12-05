@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { Observer, Auth } from "@calpoly/mustang";
 import { iconStyles } from "../styles/icon-styles.css.ts";
@@ -10,6 +10,7 @@ interface Itinerary {
   itineraryid: string;
   tripid: string;
   tripName: string;
+  owner?: string;
   day: number;
   date: string;
   activities: Array<{
@@ -115,85 +116,60 @@ class TripViewElement extends LitElement {
     }
   }
 
-  static styles = [
-    themeTokens,
-    iconStyles,
-    ...pageStyles,
-    css`
-      :host {
-        display: block;
-      }
+  private handleDelete(itineraryid: string) {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this itinerary?"
+    );
+    if (!confirmed) return;
 
-      .activity-list {
-        list-style: none;
-        padding: 0;
-        margin: var(--spacing-md) 0;
+    const message: [
+      "itinerary/delete",
+      {
+        itineraryid: string;
+        callbacks?: {
+          onSuccess?: () => void;
+          onFailure?: (err: Error) => void;
+        };
       }
+    ] = [
+      "itinerary/delete",
+      {
+        itineraryid,
+        callbacks: {
+          onSuccess: () => {
+            // Refresh list after deletion and show a quick toast
+            this.loadItineraries();
+            const toast = document.createElement("div");
+            toast.textContent = "Itinerary deleted";
+            toast.style.position = "fixed";
+            toast.style.bottom = "16px";
+            toast.style.right = "16px";
+            toast.style.background = "var(--color-success, #2e7d32)";
+            toast.style.color = "white";
+            toast.style.padding = "8px 12px";
+            toast.style.borderRadius = "6px";
+            toast.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+          },
+          onFailure: (err: Error) => {
+            this.error = err.message || "Failed to delete itinerary";
+            this.requestUpdate();
+          },
+        },
+      },
+    ];
 
-      .activity-item {
-        display: flex;
-        gap: var(--spacing-sm);
-        padding: var(--spacing-sm) 0;
-        border-bottom: 1px solid var(--color-border-light);
-      }
+    this.dispatchEvent(
+      new CustomEvent("message", {
+        detail: message,
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
 
-      .activity-item:last-child {
-        border-bottom: none;
-      }
-
-      .activity-time {
-        font-weight: var(--font-weight-semibold);
-        color: var(--color-primary);
-        min-width: 80px;
-        flex-shrink: 0;
-      }
-
-      .loading-message,
-      .error-message {
-        text-align: center;
-        padding: var(--spacing-lg);
-      }
-
-      .quick-links {
-        padding: var(--spacing-lg);
-        border: 1px solid var(--color-border);
-        border-radius: var(--radius-md);
-        background: var(--color-surface);
-      }
-
-      .quick-links h4 {
-        margin-top: 0;
-      }
-
-      .quick-links ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      .quick-links li {
-        padding: var(--spacing-xs) 0;
-      }
-
-      /* Override pageStyles for links to ensure they're styled */
-      .quick-links a {
-        color: var(--color-link);
-        text-decoration: underline;
-        text-decoration-color: var(--color-link);
-        text-underline-offset: 2px;
-        font-weight: var(--font-weight-semibold);
-        transition: all 0.2s ease;
-      }
-
-      .quick-links a:hover {
-        color: var(--color-link-hover);
-        text-decoration-color: var(--color-link-hover);
-      }
-
-      .quick-links a:visited {
-        color: var(--color-link-visited);
-      }
-    `,
-  ];
+  static styles = [themeTokens, iconStyles, ...pageStyles];
 
   render() {
     const title = this.prettyTitle(this.slug);
@@ -211,15 +187,26 @@ class TripViewElement extends LitElement {
 
       ${this.renderItineraries()}
 
-      <div class="quick-links">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="/app/trips">All Trips</a></li>
-          <li><a href="/app/parks">Parks</a></li>
-          <li><a href="/app/paths">Paths</a></li>
-          <li><a href="/app/poi">Points of Interest</a></li>
-        </ul>
-      </div>
+      <card-element
+        class="quick-links-card"
+        .title=${"Quick Links"}
+        .description=${html`
+          <ul>
+            <li>
+              <a href="/app/trips">All Trips</a>
+            </li>
+            <li>
+              <a href="/app/parks">Parks</a>
+            </li>
+            <li>
+              <a href="/app/paths">Paths</a>
+            </li>
+            <li>
+              <a href="/app/poi">Points of Interest</a>
+            </li>
+          </ul>
+        `}
+      ></card-element>
     `;
   }
 
@@ -245,8 +232,8 @@ class TripViewElement extends LitElement {
         ${this.itineraries.map(
           (itinerary) => html`
             <card-element
-              .title="${itinerary.card.title}"
-              .description="${html`
+              .title=${itinerary.card.title}
+              .description=${html`
                 <div>
                   <p><strong>Date:</strong> ${itinerary.date}</p>
                   ${itinerary.campsiteId && itinerary.campsiteName
@@ -294,8 +281,19 @@ class TripViewElement extends LitElement {
                     ? html`<p><strong>Notes:</strong> ${itinerary.notes}</p>`
                     : ""}
                 </div>
-              `}"
+              `}
             >
+              ${this.user?.username && itinerary.owner === this.user.username
+                ? html`
+                    <div slot="actions">
+                      <button
+                        @click=${() => this.handleDelete(itinerary.itineraryid)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  `
+                : ""}
             </card-element>
           `
         )}

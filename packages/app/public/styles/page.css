@@ -15,7 +15,6 @@ body {
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-base);
   margin: 0;
-  padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
 }
 
 /* Navigation styling */
@@ -50,10 +49,8 @@ h2 {
   border-left: 4px solid var(--color-accent);
 }
 
-/* Article and section styling */
 article {
   background-color: var(--color-background-section);
-  padding: var(--spacing-lg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   display: grid;
@@ -83,7 +80,7 @@ card-grid {
   display: block;
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
 }
 
 card-element {

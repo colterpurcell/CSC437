@@ -65,6 +65,7 @@ class CardElement extends LitElement {
     css`
       :host {
         display: block;
+        --card-image-height: 180px;
       }
 
       .card {
@@ -76,7 +77,6 @@ class CardElement extends LitElement {
         box-shadow: var(--shadow-sm);
         transition: all 0.2s ease;
         height: auto;
-        min-height: 200px;
         display: flex;
         flex-direction: column;
       }
@@ -92,7 +92,7 @@ class CardElement extends LitElement {
       }
 
       .card.has-image {
-        padding-top: calc(200px + var(--spacing-lg));
+        padding-top: calc(var(--card-image-height) + var(--spacing-lg));
       }
 
       .card.clickable {
@@ -110,13 +110,16 @@ class CardElement extends LitElement {
         top: 0;
         left: 0;
         width: 100%;
-        height: 200px;
+        height: var(--card-image-height);
         object-fit: cover;
         border-radius: var(--radius-md) var(--radius-md) 0 0;
+        z-index: 0;
       }
 
       .card-content {
         flex: 1;
+        position: relative;
+        z-index: 1;
         display: flex;
         flex-direction: column;
       }
@@ -252,7 +255,7 @@ class CardElement extends LitElement {
 
           <slot name="description">
             ${description
-              ? html` <p class="card-description">${description}</p> `
+              ? html` <div class="card-description">${description}</div> `
               : ""}
           </slot>
 
@@ -300,6 +303,7 @@ class CardGrid extends LitElement {
         display: block;
         width: 100%;
         box-sizing: border-box;
+        margin-bottom: var(--spacing-lg);
       }
 
       .grid {

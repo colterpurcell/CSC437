@@ -63,43 +63,7 @@ class HomeViewElement extends LitElement {
           </svg>
         </card-element>
       </section>
-      <section>
-        <section-header title="Camper Types" icon="campervan"></section-header>
-        <card-grid columns="repeat(auto-fit, minmax(300px, 1fr))">
-          <card-element
-            title="Camper"
-            description="Traditional camping with car access and established campgrounds. Perfect for families and those who prefer comfort and convenience."
-            href="/app/campers/camper"
-            clickable
-          >
-            <svg slot="icon" class="icon icon-md" viewBox="0 0 100 100">
-              <use href="/assets/icons/camping.svg#icon-campervan"></use>
-            </svg>
-          </card-element>
-
-          <card-element
-            title="Backpacker"
-            description="Wilderness camping with minimal gear carried on foot. Experience remote locations and pristine nature away from crowds."
-            href="/app/campers/backpacker"
-            clickable
-          >
-            <svg slot="icon" class="icon icon-md" viewBox="0 0 100 100">
-              <use href="/assets/icons/camping.svg#icon-backpack"></use>
-            </svg>
-          </card-element>
-
-          <card-element
-            title="Bikepacker"
-            description="Combine cycling and camping for unique adventures. Travel light while covering more ground than traditional backpacking."
-            href="/app/campers/bikepacker"
-            clickable
-          >
-            <svg slot="icon" class="icon icon-md" viewBox="0 0 100 100">
-              <use href="/assets/icons/camping.svg#icon-bike"></use>
-            </svg>
-          </card-element>
-        </card-grid>
-      </section>
+      <!-- Camper Types section removed (deprecated placeholder content) -->
 
       <section>
         <section-header

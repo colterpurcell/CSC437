@@ -246,10 +246,7 @@ class NavElement extends LitElement {
           <slot name="actions"></slot>
 
           ${this.loggedIn
-            ? html`
-                <span>Hello, ${this.userid || "traveler"}</span>
-                <button @click=${this._handleSignOut}>Sign Out</button>
-              `
+            ? html` <button @click=${this._handleSignOut}>Sign Out</button> `
             : html` <a href="/app/login">Sign In</a> `}
           ${!this.hideThemeToggle
             ? html`

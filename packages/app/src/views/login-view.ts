@@ -1,6 +1,6 @@
 import { LitElement, html } from "lit";
 import { customElement } from "lit/decorators.js";
-import { LoginFormElement } from "../auth/login-form.ts";
+import "../auth/login-form.ts";
 import { themeTokens } from "../styles/theme-tokens.css.ts";
 import { pageStyles } from "../styles/page-styles.css.ts";
 
@@ -47,6 +47,3 @@ class LoginViewElement extends LitElement {
 }
 
 export default LoginViewElement;
-
-// Ensure custom element is defined for login-form (registered via define in main.ts)
-void LoginFormElement;

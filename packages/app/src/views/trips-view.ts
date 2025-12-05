@@ -9,6 +9,7 @@ interface Itinerary {
   itineraryid: string;
   tripid: string;
   tripName: string;
+  owner?: string;
   day: number;
   date: string;
   activities: Array<{
@@ -87,6 +88,47 @@ class TripsViewElement extends LitElement {
     }
   }
 
+  async deleteTrip(tripid: string) {
+    if (!this.user) return;
+    const confirmDelete = window.confirm(
+      `Delete trip ${tripid} and all its itineraries? This cannot be undone.`
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const headers = Auth.headers(this.user);
+      // 1) Load all itineraries for this trip
+      const listRes = await fetch(
+        `/api/itineraries?trip=${encodeURIComponent(tripid)}`,
+        { headers }
+      );
+      if (!listRes.ok) throw new Error(`List failed: HTTP ${listRes.status}`);
+      const list: Itinerary[] = await listRes.json();
+
+      // 2) Ownership check: ensure all belong to current user
+      const username = (this.user as any)?.username as string | undefined;
+      if (!username || !list.every((i) => i.owner === username)) {
+        this.error = "You can only delete your own trips.";
+        return;
+      }
+
+      // 3) Delete each itinerary by id using existing endpoint
+      await Promise.all(
+        list.map((i) =>
+          fetch(`/api/itineraries/${encodeURIComponent(i.itineraryid)}`, {
+            method: "DELETE",
+            headers,
+          })
+        )
+      );
+
+      // 4) Update local state
+      this.itineraries = this.itineraries.filter((i) => i.tripid !== tripid);
+    } catch (err) {
+      this.error = err instanceof Error ? err.message : String(err);
+    }
+  }
+
   groupByTrip(): TripGroup[] {
     const groups = new Map<string, TripGroup>();
 
@@ -154,6 +196,9 @@ class TripsViewElement extends LitElement {
         detailed day-by-day itinerary.
       </p>
 
+      ${this.user
+        ? html`<p><a href="/app/trips/new">Create a new itinerary</a></p>`
+        : ""}
       ${this.renderContent()}
     `;
   }
@@ -205,6 +250,9 @@ class TripsViewElement extends LitElement {
         gap="var(--spacing-xl)"
       >
         ${tripGroups.map((group) => {
+          const username = this.user?.username as string | undefined;
+          const ownedByUser =
+            !!username && group.itineraries.every((i) => i.owner === username);
           const numDays = group.itineraries.length;
           const startDate = group.itineraries[0]?.date || "";
           const endDate =
@@ -220,8 +268,27 @@ class TripsViewElement extends LitElement {
                 ? ` to ${endDate}`
                 : ""}${campsite ? ` • ${campsite}` : ""}"
               href="/app/trips/${group.tripid}"
-              clickable
-            ></card-element>
+            >
+              <div slot="footer" style="display:flex; gap: var(--spacing-sm);">
+                <a class="card-link" href="/app/trips/${group.tripid}">Open</a>
+                ${ownedByUser
+                  ? html`<button
+                      type="button"
+                      @click=${() => this.deleteTrip(group.tripid)}
+                      style="
+                          appearance:none;
+                          border:1px solid var(--color-border);
+                          border-radius: var(--radius-md);
+                          padding: var(--spacing-xs) var(--spacing-sm);
+                          background: var(--color-danger-bg, transparent);
+                          color: var(--color-danger, var(--color-text));
+                          cursor: pointer;"
+                    >
+                      Delete Trip
+                    </button>`
+                  : ""}
+              </div>
+            </card-element>
           `;
         })}
       </card-grid>

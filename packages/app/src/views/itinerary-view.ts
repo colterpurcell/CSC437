@@ -4,6 +4,7 @@ import { Observer, Auth } from "@calpoly/mustang";
 import { iconStyles } from "../styles/icon-styles.css.ts";
 import { themeTokens } from "../styles/theme-tokens.css.ts";
 import { pageStyles } from "../styles/page-styles.css.ts";
+
 import "../components/card.ts";
 
 interface Itinerary {
@@ -17,6 +18,9 @@ interface Itinerary {
     activity: string;
     location: string;
     description?: string;
+    pathId?: string;
+    poiId?: string;
+    campsiteId?: string;
   }>;
   campsiteId?: string;
   campsiteName?: string;
@@ -85,6 +89,35 @@ class ItineraryViewElement extends LitElement {
       this.error =
         error instanceof Error ? error.message : "Failed to load itineraries";
       this.loading = false;
+    }
+  }
+
+  async deleteItinerary(itineraryid: string) {
+    if (!this.user) return;
+    const confirmDelete = window.confirm(
+      `Delete itinerary ${itineraryid}? This cannot be undone.`
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const headers = Auth.headers(this.user);
+      const res = await fetch(
+        `/api/itineraries/${encodeURIComponent(itineraryid)}`,
+        {
+          method: "DELETE",
+          headers,
+        }
+      );
+      if (res.status === 204) {
+        this.itineraries = this.itineraries.filter(
+          (i) => i.itineraryid !== itineraryid
+        );
+      } else if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || `HTTP ${res.status}`);
+      }
+    } catch (err) {
+      this.error = err instanceof Error ? err.message : String(err);
     }
   }
 
@@ -280,7 +313,12 @@ class ItineraryViewElement extends LitElement {
                           ${itinerary.campsiteName
                             ? html`<p>
                                 <strong>Campsite:</strong>
-                                ${itinerary.campsiteName}
+                                ${itinerary.campsiteId
+                                  ? html`<a
+                                      href="/app/campsites/${itinerary.campsiteId}"
+                                      >${itinerary.campsiteName}</a
+                                    >`
+                                  : itinerary.campsiteName}
                               </p>`
                             : ""}
 
@@ -294,7 +332,22 @@ class ItineraryViewElement extends LitElement {
                                   >
                                   <div>
                                     <strong>${activity.activity}</strong> at
-                                    ${activity.location}
+                                    ${activity.pathId
+                                      ? html`<a
+                                          href="/app/paths/${activity.pathId}"
+                                          >${activity.location}</a
+                                        >`
+                                      : activity.poiId
+                                      ? html`<a
+                                          href="/app/poi/${activity.poiId}"
+                                          >${activity.location}</a
+                                        >`
+                                      : activity.campsiteId
+                                      ? html`<a
+                                          href="/app/campsites/${activity.campsiteId}"
+                                          >${activity.location}</a
+                                        >`
+                                      : activity.location}
                                     ${activity.description
                                       ? html`<br /><em
                                             >${activity.description}</em
@@ -314,6 +367,23 @@ class ItineraryViewElement extends LitElement {
                         </div>
                       `}"
                     >
+                      <div slot="footer">
+                        <button
+                          type="button"
+                          @click=${() =>
+                            this.deleteItinerary(itinerary.itineraryid)}
+                          style="
+                            appearance:none;
+                            border:1px solid var(--color-border);
+                            border-radius: var(--radius-md);
+                            padding: var(--spacing-xs) var(--spacing-sm);
+                            background: var(--color-danger-bg, transparent);
+                            color: var(--color-danger, var(--color-text));
+                            cursor: pointer;"
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </card-element>
                   `
                 )}
