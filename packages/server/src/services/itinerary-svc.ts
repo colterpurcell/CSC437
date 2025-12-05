@@ -12,8 +12,8 @@ function getByTrip(tripid: string): Promise<IItinerary[]> {
   return ItineraryModel.find({ tripid }).sort({ day: 1 }).exec();
 }
 
-function getByUser(userid: string): Promise<IItinerary[]> {
-  return ItineraryModel.find({ userid }).sort({ tripid: 1, day: 1 }).exec();
+function getByOwner(owner: string): Promise<IItinerary[]> {
+  return ItineraryModel.find({ owner }).sort({ tripid: 1, day: 1 }).exec();
 }
 
 function create(itinerary: IItinerary): Promise<IItinerary> {
@@ -39,4 +39,22 @@ function remove(itineraryid: string): Promise<void> {
   });
 }
 
-export default { index, get, getByTrip, getByUser, create, update, remove };
+export default {
+  index,
+  get,
+  getByTrip,
+  getByOwner,
+  create,
+  update,
+  remove,
+};
+// Default export updated to use getByOwner (was getByUser)
+export const Itineraries = {
+  index,
+  get,
+  getByTrip,
+  getByOwner,
+  create,
+  update,
+  remove,
+};
