@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>National Parks Adventure Guide</title>
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <script type="module">
+      import { pageStyles } from "/src/styles/page-styles.css.ts";
+      // Apply global styles to document
+      const style = document.createElement("style");
+      style.textContent = pageStyles.map((s) => s.cssText).join("");
+      document.head.appendChild(style);
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <mu-history provides="natty:history">
+      <mu-auth provides="natty:auth" redirect="/app/login">
+        <mu-store provides="natty:model">
+          <article class="page">
+            <mu-switch></mu-switch>
+          </article>
+        </mu-store>
+      </mu-auth>
+    </mu-history>
+  </body>
+</html>

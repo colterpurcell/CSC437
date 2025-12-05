@@ -15,7 +15,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev --workspace=server\" \"npm run dev --workspace=proto\"",
+    "dev": "concurrently \"npm run dev --workspace=server\" \"npm run dev --workspace=app\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "workspaces": [

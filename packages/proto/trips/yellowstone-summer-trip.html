@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yellowstone Summer Trip</title>
-    <link rel="stylesheet" href="/styles/page.css" />
+    <link rel="stylesheet" href="../public/styles/page.css" />
     <script type="module">
       import { define } from "@calpoly/mustang";
-      import { NavElement } from "/nav.ts";
+      import { NavElement } from "../nav.ts";
 
       define({
         "nav-element": NavElement,
@@ -24,7 +24,7 @@
     <article>
       <h1>
         <svg class="icon icon-xl">
-          <use href="/assets/icons/camping.svg#icon-campfire"></use>
+          <use href="../public/assets/icons/camping.svg#icon-campfire"></use>
         </svg>
         Yellowstone Summer Trip
       </h1>
@@ -50,7 +50,7 @@
       <section class="itinerary-preview" style="margin-top: var(--spacing-xl)">
         <h2>
           <svg class="icon icon-sm">
-            <use href="/assets/icons/camping.svg#icon-info"></use>
+            <use href="../public/assets/icons/camping.svg#icon-info"></use>
           </svg>
           7-Day Itinerary
         </h2>
@@ -69,7 +69,7 @@
       <section class="camper-options" style="margin-top: var(--spacing-xl)">
         <h2>
           <svg class="icon icon-md">
-            <use href="/assets/icons/camping.svg#icon-tent"></use>
+            <use href="../public/assets/icons/camping.svg#icon-tent"></use>
           </svg>
           How Different Campers Experience This Trip
         </h2>
@@ -78,7 +78,9 @@
             <h3>
               <a href="../campers/camper.html">
                 <svg class="icon icon-sm">
-                  <use href="/assets/icons/camping.svg#icon-tent"></use>
+                  <use
+                    href="../public/assets/icons/camping.svg#icon-tent"
+                  ></use>
                 </svg>
                 Family Campers
               </a>
@@ -95,7 +97,9 @@
             <h3>
               <a href="../campers/backpacker.html">
                 <svg class="icon icon-sm">
-                  <use href="/assets/icons/camping.svg#icon-backpack"></use>
+                  <use
+                    href="../public/assets/icons/camping.svg#icon-backpack"
+                  ></use>
                 </svg>
                 Backpackers
               </a>
@@ -112,7 +116,9 @@
             <h3>
               <a href="../campers/bikepacker.html">
                 <svg class="icon icon-sm">
-                  <use href="/assets/icons/camping.svg#icon-bike"></use>
+                  <use
+                    href="../public/assets/icons/camping.svg#icon-bike"
+                  ></use>
                 </svg>
                 Bikepackers
               </a>
@@ -162,13 +168,15 @@
             <div class="destination-card">
               <h4>
                 <svg class="icon icon-sm">
-                  <use href="/assets/icons/camping.svg#icon-lake"></use>
+                  <use
+                    href="../public/assets/icons/camping.svg#icon-lake"
+                  ></use>
                 </svg>
                 Yellowstone Lake
               </h4>
               <p>Shoreline views and boating access</p>
             </div>
-            <a href="/parks/yell/index.html#poi" class="destination-card">
+            <a href="../parks/yell/index.html#poi" class="destination-card">
               <h4>
                 <svg class="icon icon-sm">
                   <use href="/assets/icons/camping.svg#icon-info"></use>
