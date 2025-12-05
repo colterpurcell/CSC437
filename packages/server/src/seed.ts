@@ -277,7 +277,7 @@ async function seed() {
       itineraryid: "yose-fall-day1",
       tripid: "yose-fall",
       tripName: "Yosemite Fall Adventure",
-      userid: "alice",
+      owner: "alice",
       day: 1,
       date: "2024-10-15",
       activities: [
@@ -328,7 +328,7 @@ async function seed() {
       itineraryid: "yose-fall-day2",
       tripid: "yose-fall",
       tripName: "Yosemite Fall Adventure",
-      userid: "alice",
+      owner: "alice",
       day: 2,
       date: "2024-10-16",
       activities: [
@@ -380,7 +380,7 @@ async function seed() {
       itineraryid: "yose-fall-day3",
       tripid: "yose-fall",
       tripName: "Yosemite Fall Adventure",
-      userid: "alice",
+      owner: "alice",
       day: 3,
       date: "2024-10-17",
       activities: [
@@ -425,7 +425,7 @@ async function seed() {
       itineraryid: "yell-summer-day1",
       tripid: "yell-summer",
       tripName: "Yellowstone Summer Explorer",
-      userid: "bob",
+      owner: "bob",
       day: 1,
       date: "2024-07-10",
       activities: [
@@ -477,7 +477,7 @@ async function seed() {
       itineraryid: "yell-summer-day2",
       tripid: "yell-summer",
       tripName: "Yellowstone Summer Explorer",
-      userid: "bob",
+      owner: "bob",
       day: 2,
       date: "2024-07-11",
       activities: [
