@@ -420,6 +420,7 @@ export class ItineraryCreateView extends View<any, Msg> {
                       this.updateAutoDates();
                     }}
                   />
+              </label>
               <label>
                 <span>Trip Name</span>
                 <input
