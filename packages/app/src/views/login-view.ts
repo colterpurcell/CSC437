@@ -42,6 +42,10 @@ class LoginViewElement extends LitElement {
           </login-form>
         </div>
       </form>
+      <p style="margin-top: 1rem; text-align: center;">
+        Don't have an account?
+        <a href="/app/register">Create a new user</a>
+      </p>
     `;
   }
 }
